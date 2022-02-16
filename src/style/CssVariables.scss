@@ -1,0 +1,14 @@
+//global vars
+$radius: 9999px;
+$mainColor:#5a21ff;
+$secondaryColor: #00ffff;
+$secondaryHoverColorDark: #172430;
+$secondaryHoverColorLight: #F5F8FA;
+$red: #E0245E;
+$love: #E0245E;
+$darkBackground : #15202B;
+
+// to use in js file
+:export {
+  radius: $radius;
+}
