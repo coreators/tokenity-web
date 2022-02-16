@@ -1,0 +1,19 @@
+$form-select-bg: transparent;
+$form-select-color: white;
+$form-select-border-color: transparent;
+$form-select-indicator-color: white;
+$body-bg: black;
+$body-color: white;
+
+//-------- css reset ---------//
+@import "./style/css_resets/normalize.scss";
+@import "./style/css_resets/reset.local.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+
+.App {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
