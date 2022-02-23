@@ -4,6 +4,11 @@ $form-select-border-color: transparent;
 $form-select-indicator-color: white;
 $body-bg: black;
 $body-color: white;
+$form-check-input-bg: white;
+
+$form-check-input-border: 1px solid white;
+$input-border-color: #272728;
+$input-group-addon-bg: #2c2c2d;
 
 //-------- css reset ---------//
 @import "./style/css_resets/normalize.scss";
@@ -14,6 +19,6 @@ $body-color: white;
   display: flex;
   flex-direction: row;
   min-height: 100vh;
-  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
 }

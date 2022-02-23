@@ -10,7 +10,7 @@
   &__title {
     padding: 15px 10px;
     height: 53px;
-    position: fixed;
+    position: absolute;
     width: 45%;
     z-index: 100;
     h1 {
@@ -80,7 +80,7 @@
   .home-box {
     width: 100%;
     margin-left: 0;
-    margin-bottom: 49px;
+    margin-bottom: 100px;
     padding-bottom: 0;
     &__title {
       width: 100%;

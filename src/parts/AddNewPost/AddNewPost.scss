@@ -1,8 +1,15 @@
 @import "../../style/CssVariables.scss";
 
+.form-select, .form-select option {
+  text-transform: capitalize;
+  background-color: black;
+}
+
 .addNewPost {
   display: flex;
   flex-direction: row;
+
+
 
   &__leftSide {
     &__imageBox {

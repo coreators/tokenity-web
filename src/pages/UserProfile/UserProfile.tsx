@@ -91,8 +91,10 @@ const UserProfile = (props) => {
         }
       }
     }
-    return (mounted = false);
-  }, [setUserProfileData]);
+    return () => {
+      mounted = false;
+    };
+  }, [setUserProfileData, userName]);
 
   const goToBack = () => {
     history(-1);
@@ -131,16 +133,16 @@ const UserProfile = (props) => {
   );
 
   // direct to post details page on click on post
-  const toPostDetails = (postID) => {
-    history("/posts/" + postID);
-  };
+  // const toPostDetails = (postID) => {
+  //   history("/posts/" + postID);
+  // };
 
   const userPosts =
     userProfileData.posts.length > 0 ? (
       <Fragment>
         {userProfileData.posts.map((post) => {
           return (
-            <div key={post.postId} onClick={() => toPostDetails(post.postId)}>
+            <div key={post.postId}>
               <PostCard post={post} />
             </div>
           );
@@ -256,11 +258,7 @@ const UserProfile = (props) => {
                 )
               ) : (
                 <Link to="/login">
-                  <AddFriendButton
-                    userName={""}
-                    userProfileData={""}
-                    setUserProfileData={""}
-                  />
+                  <AddFriendButton userName="" />
                 </Link>
               )}
             </div>

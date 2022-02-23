@@ -1,4 +1,5 @@
 import React, { useContext, useState, Fragment } from "react";
+
 import { Link } from "react-router-dom";
 
 // style file
@@ -9,11 +10,14 @@ import default_pp from "../../assets/Images/default_pp.png";
 
 // components
 import FormSubmitButton from "../../components/Buttons/FormSubmitButton/FormSubmitButton";
+import AddNewPostInput from "./AddNewPostInput";
 
 // context (global state)
 import { ThemeContext } from "../../context/ThemeContext";
 import { LanguageContext } from "../../context/LanguageContext";
 import UserContext from "../../context/UserContext";
+
+import { types, extraInputs } from "./constants";
 
 const AddNewPost = ({ inputId, setOpen }) => {
   // ******* start global state ******* //
@@ -44,6 +48,12 @@ const AddNewPost = ({ inputId, setOpen }) => {
     imagePath: null,
     image: "",
   });
+
+  const [type, setType] = useState("porst");
+
+  const handleSelect = (e) => {
+    setType(e.target.value);
+  };
 
   // auto resize textarea box, when user type long text
   const handleChange = (event) => {
@@ -85,15 +95,30 @@ const AddNewPost = ({ inputId, setOpen }) => {
     fileInput.click();
   };
 
+  const handleVideoChange = (event) => {
+    const image = event.target.files[0];
+    setImageStatus({
+      select: true,
+      imagePath: URL.createObjectURL(image),
+      image,
+    });
+  };
+
+  const handleVideoUpload = () => {
+    const fileInput = document.getElementById(inputId + "_video");
+    fileInput.click();
+  };
+
   const imageDelete = () => {
     setImageStatus({
       select: false,
       imagePath: null,
+      image: "",
     });
   };
 
   return (
-    <div className="">
+    <div>
       <div className="addNewPost">
         <div className="addNewPost__leftSide">
           <div className="addNewPost__leftSide__imageBox">
@@ -148,7 +173,6 @@ const AddNewPost = ({ inputId, setOpen }) => {
                   ></div>
                 </div>
                 <div className="addNewPost__rightSide__postImageBox__imageWrapper">
-                  {/* <ImageModal imageUrl={imageStatus.imagePath} className='' />*/}
                   <img alt="post" src={imageStatus.imagePath} />
                 </div>
               </Fragment>
@@ -158,20 +182,23 @@ const AddNewPost = ({ inputId, setOpen }) => {
           </div>
         </div>
       </div>
-      <div className="row ">
+      <div className="row">
         <div className="col-auto me-auto">
           <div className="row">
             <div className="col-auto">
               <select
                 className="form-select"
-                aria-label="Default select example"
-                defaultValue="post"
+                aria-label="Select Post Type"
+                value={type}
+                onChange={handleSelect}
               >
-                <option value="post">Post</option>
-                <option value="ticket">Ticket</option>
-                <option value="art">Art</option>
-                <option value="funding">Funding</option>
-                <option value="cert">Certification</option>
+                {types.map((value, index) => {
+                  return (
+                    <option key={index} value={value}>
+                      {value}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div className="col-auto addNewPost__rightSide__buttonsBox__imageUpload p-2">
@@ -186,23 +213,21 @@ const AddNewPost = ({ inputId, setOpen }) => {
                   className="fas fa-image"
                   style={{ color: theme.inputIcon }}
                 ></i>
-                <div className="background"></div>
               </div>
             </div>
 
             <div className="col-auto addNewPost__rightSide__buttonsBox__imageUpload p-2">
               <input
                 type="file"
-                id={inputId}
-                accept="image/x-png,image/jpeg"
-                onChange={(event) => handleImageChange(event)}
+                id={inputId + "_video"}
+                accept="video/mp4,video/x-m4v,video/*"
+                onChange={(event) => handleVideoChange(event)}
               />
-              <div className="button" onClick={() => handleImageUpload()}>
+              <div className="button" onClick={() => handleVideoUpload()}>
                 <i
                   className="fas fa-video"
                   style={{ color: theme.inputIcon }}
                 ></i>
-                <div className="background"></div>
               </div>
             </div>
           </div>
@@ -221,6 +246,20 @@ const AddNewPost = ({ inputId, setOpen }) => {
           />
         </div>
       </div>
+
+      {Object.keys(extraInputs).map((key) => {
+        if (type === key) {
+          return (
+            <div key={`x${key}`}>
+              {extraInputs[key].map((v, index) => {
+                return <AddNewPostInput key={`${key}x${index}`} v={v} />;
+              })}
+            </div>
+          );
+        } else {
+          return "";
+        }
+      })}
     </div>
   );
 };

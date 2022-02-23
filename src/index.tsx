@@ -6,6 +6,8 @@ import App from "./App";
 
 import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
+// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// import 'bootstrap/dist/css/bootstrap.css';
 
 import "bootstrap/dist/js/bootstrap.bundle.min";
 const rootElement = document.getElementById("root");

@@ -5,6 +5,8 @@ import "./TokenityBtnNavbar.scss";
 // Global vars import
 import variables from "../../../style/CssVariables.scss";
 
+import AppIcon from "../../../components/AppIcon"
+
 // libraries
 import { Modal } from "react-bootstrap";
 
@@ -47,21 +49,20 @@ const TokenityBtnNavbar = () => {
         </button>
         <button
           className="smallButton"
+          title="add new post"
           style={{
             color: "#fff",
             backgroundColor: theme.mainColor,
           }}
         >
-          <i className="fas fa-feather-alt"></i>
+          <AppIcon />
+
         </button>
       </div>
 
       <Modal show={isOpen} onHide={closeModal} keyboard={false}>
         <Modal.Header
-          style={{
-            borderBottom: 0,
-            background: theme.background,
-          }}
+
           className="formSubmitButtonsBox__modal__header"
         >
           <div
@@ -69,12 +70,6 @@ const TokenityBtnNavbar = () => {
             onClick={() => closeModal()}
           >
             <i className="fal fa-times" style={{ color: theme.mainColor }}></i>
-            <div
-              className="formSubmitButtonsBox__modal__header__iconBox__background"
-              style={{
-                background: theme.secondaryColor,
-              }}
-            ></div>
           </div>
         </Modal.Header>
         <Modal.Body
