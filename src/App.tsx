@@ -1,3 +1,5 @@
+import * as React from "react";
+
 // modals
 import NiceModal from "@ebay/nice-modal-react";
 import PostCardMore from "./components/PostCardModal/PostCardMore";
@@ -12,6 +14,11 @@ import MobileNavbar from "./parts/MobileNavbar/MobileNavbar";
 import RightSide from "./parts/RightSide/RightSide";
 import TabletNavBarNotAuth from "./parts/TabletNavBarNotAuth/TabletNavBarNotAuth";
 
+// util
+// import History from "./util/History";
+// import AuthRoute from "./util/AuthRoute";
+//import ScrollToTop from "./util/ScrollToTop";
+
 // libraries
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import axios from "axios";
@@ -22,6 +29,7 @@ import LanguageContextProvider from "./context/LanguageContext";
 import UserContext from "./context/UserContext";
 import PostsContext from "./context/PostsContext";
 import UserProfileContext from "./context/UserProfileContext";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 // api services
 import UserService from "./services/UserService";
@@ -29,6 +37,8 @@ import UserService from "./services/UserService";
 // pages
 import PageLoader from "./pages/PageLoader/PageLoader";
 
+// import Home from "./pages/Home/Home";
+// import Login from "./pages/Login/Login";
 const Home = lazy(() => import("./pages/Home/Home"));
 const PostDetails = lazy(() => import("./pages/PostDetails/PostDetails"));
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -143,7 +153,17 @@ function App() {
     };
 
     checkLoggedIn();
-  }, []);
+  }, [history]);
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: "dark",
+        },
+      }),
+    []
+  );
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
@@ -151,40 +171,45 @@ function App() {
         <UserProfileContext.Provider
           value={{ userProfileData, setUserProfileData }}
         >
-          <ThemeContextProvider>
-            <LanguageContextProvider>
-              <NiceModal.Provider>
-                <div className="App">
-                  <Navbar />
-                  <MobileNavbar />
-                  {!userData.isAuth && <TabletNavBarNotAuth />}
-                  <Suspense fallback={<PageLoader />}>
-                    {/* <ScrollToTop /> */}
+          <ThemeProvider theme={theme}>
+            <ThemeContextProvider>
+              <LanguageContextProvider>
+                <NiceModal.Provider>
+                  <div className="App">
+                    <Navbar />
+                    <MobileNavbar />
+                    {!userData.isAuth && <TabletNavBarNotAuth />}
+                    <Suspense fallback={<PageLoader />}>
+                      {/* <ScrollToTop /> */}
 
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/posts/:postId" element={<PostDetails />} />
-                      <Route
-                        path="/users/:userName"
-                        element={<UserProfile />}
-                      />
-                      <Route
-                        path="/notifications"
-                        element={<Notifications />}
-                      />
-                      <Route path="/wallet" element={<Wallet />} />
-                      <Route path="/settings" element={<Settings />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/signup" element={<Signup />} />
-                      <Route path="404" element={<Page404 />} />
-                      <Route path="*" element={<Page404 />} />
-                    </Routes>
-                  </Suspense>
-                  <RightSide />
-                </div>
-              </NiceModal.Provider>
-            </LanguageContextProvider>
-          </ThemeContextProvider>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route
+                          path="/posts/:postId"
+                          element={<PostDetails />}
+                        />
+                        <Route
+                          path="/users/:userName"
+                          element={<UserProfile />}
+                        />
+                        <Route
+                          path="/notifications"
+                          element={<Notifications />}
+                        />
+                        <Route path="/wallet" element={<Wallet />} />
+                        <Route path="/settings" element={<Settings />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="404" element={<Page404 />} />
+                        <Route path="*" element={<Page404 />} />
+                      </Routes>
+                    </Suspense>
+                    <RightSide />
+                  </div>
+                </NiceModal.Provider>
+              </LanguageContextProvider>
+            </ThemeContextProvider>
+          </ThemeProvider>
         </UserProfileContext.Provider>
       </PostsContext.Provider>
     </UserContext.Provider>

@@ -1,0 +1,101 @@
+.card {
+  margin: 50px 60px 0px 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 380px;
+  max-width: 290px;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+.backImage {
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  filter: blur(3px);
+}
+.backImageOverlay {
+  background: transparent linear-gradient(180deg, #00000000 0%, #000000 100%) 0%
+    0% no-repeat padding-box;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.profileImageLine {
+  // background: linear-gradient(225deg, #5a21ff 0%, #00fffa 100%) border-box;
+  // border: 5px solid transparent;
+
+  width: 138px;
+  height: 138px;
+  border-radius: 50%;
+
+  position: absolute;
+  z-index: 2;
+  top: 60px;
+  left: 50%;
+  margin-left: -69px;
+  svg {
+    position: absolute;
+  }
+}
+.profileImage {
+  margin: 6px;
+  height: 126px;
+  width: 126px;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.name {
+  position: absolute;
+  z-index: 2;
+  top: 205px;
+  width: 100%;
+  h2 {
+    text-align: center;
+    font-size: 24px;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.stats {
+  position: absolute;
+  z-index: 2;
+  top: 300px;
+  height: 40px;
+  left: 20px;
+  right: 20px;
+
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+
+  div {
+    text-align: center;
+    width: 80px;
+  }
+  h6 {
+    margin-top: 5px;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 10px;
+  }
+}

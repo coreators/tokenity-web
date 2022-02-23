@@ -20,12 +20,15 @@
     &:focus {
       outline: 0;
     }
+    svg {
+      padding: 10px;
+    }
   }
 }
 
 /* modal edit */
 
-.modal{
+.modal {
   padding-left: 0 !important;
 }
 
@@ -40,6 +43,8 @@
 }
 
 .formSubmitButtonsBox__modal__header {
+  border-bottom: 0 !important;
+  background-color: black;
   padding: 10px 15px !important;
   border-top-left-radius: 15px !important;
   border-top-right-radius: 15px !important;
@@ -72,8 +77,8 @@
 @media only screen and (max-width: 500px) {
   .modal-dialog {
     margin: 0 !important;
-    }
-    
+  }
+
   .modal-content {
     .modal-body {
       border-bottom-left-radius: 0 !important;

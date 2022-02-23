@@ -57,7 +57,9 @@ const AddFriendButton = ({ userName }) => {
         }
       }
     }
-    return (mounted = false);
+    return () => {
+      mounted = false
+    };
   }, [userData.isAuth, userName, friendsDependency, userData.user.friends]);
 
   // add friend

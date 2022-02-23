@@ -1,23 +1,19 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment } from "react";
 
 // style file
-import './RightSide.scss';
+import "./RightSide.scss";
 
 // context (global state)
-import { ThemeContext } from '../../context/ThemeContext';
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
 // libraries
 // import WhoToAdd from '../WhoToAdd/WhoToAdd';
-import Join from '../Join/Join';
-import CurrentUser from '../CurrentUser/CurrentUser';
+import Join from "../Join/Join";
+// import CurrentUser from "../CurrentUser/CurrentUser";
+import UserProfileCard from "../CurrentUser/UserProfileCard";
 
 const RightSide = () => {
   // ******* start global state ******* //
-
-  // theme context
-  const { isLightTheme, light, dark } = useContext(ThemeContext);
-  const theme = isLightTheme ? light : dark;
 
   // user context
   const { userData } = useContext(UserContext);
@@ -27,15 +23,12 @@ const RightSide = () => {
 
   return (
     <div className="rightSide">
-      <div
-        className="rightSide__box"
-        style={{
-          backgroundColor: `${theme.background}`,
-        }}
-      >
+      <div className="rightSide__box">
         {userData.isAuth && window.screen.width > 991 ? (
           <Fragment>
-            <CurrentUser />
+            <UserProfileCard />
+
+            {/* <CurrentUser /> */}
             {/* <div
               className="rightSide__box__whoToAddBox"
               style={{
