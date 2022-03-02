@@ -7,15 +7,15 @@ import styles from "./UserProfileCard.module.scss";
 
 // assets
 
-import DefaultAvatar from "../../assets/Images/default_pp.png";
+// import DefaultAvatar from "../../assets/Images/default_pp.png";
 import DefaultCover from "../../assets/Images/default_cp.png";
 
 // libraries
-import moment from "moment";
+// import moment from "moment";
 import Linkify from "linkify-react";
 
 // component
-import ImageModal from "../../components/ImageModal/ImageModal";
+// import ImageModal from "../../components/ImageModal/ImageModal";
 
 import CheckVerifiedUserName from "../../components/CheckVerifiedUserName";
 

@@ -8,13 +8,9 @@ import TabPanel from "@mui/lab/TabPanel";
 // style
 import "./Wallet.scss";
 
-import mock from './mock'
+import mock from "./mock";
 
 const Wallet = () => {
-
-
-
-  
   // mock data
   // total cosm
   // total dollar
@@ -42,7 +38,7 @@ const Wallet = () => {
         {/* total price */}
 
         <h2 className="text-center">
-          {mock.total_cosm} <small>COSM</small>
+          {mock.total_cosm.toLocaleString()} <small>COSM</small>
         </h2>
       </div>
       {/* tabs */}

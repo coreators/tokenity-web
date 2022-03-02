@@ -10,6 +10,7 @@ import * as serviceWorker from "./serviceWorker";
 // import 'bootstrap/dist/css/bootstrap.css';
 
 import "bootstrap/dist/js/bootstrap.bundle.min";
+
 const rootElement = document.getElementById("root");
 render(
   <React.StrictMode>

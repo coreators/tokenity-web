@@ -11,19 +11,19 @@
       border-radius: 15px;
       margin: 20px 60px 30px 20px;
 
-    .whoToAdd{
-      &__title{
-        h2{
-          padding: 0 15px 10px;
+      .whoToAdd {
+        &__title {
+          h2 {
+            padding: 0 15px 10px;
+          }
         }
-      }
 
-      &__usersBox{
-        &__user{
-          padding: 10px 15px;
+        &__usersBox {
+          &__user {
+            padding: 10px 15px;
+          }
         }
       }
-    }
     }
   }
 }
@@ -39,21 +39,21 @@
 @media (min-width: 501px) and (max-width: 991px) {
   /* For tablet: */
   .rightSide__box {
-    width: 10%;
+    display: none;
 
-    &__whoToAddBox{
-        display: none;
-    }
+    // &__whoToAddBox {
+    //   display: none;
+    // }
 
-    .JoinTokenity{
-      display: none;
-    }
+    // .JoinTokenity {
+    //   display: none;
+    // }
   }
 }
 
 @media (min-width: 992px) and (max-width: 1280px) {
   /* For small lab: */
-  .rightSide__box { 
+  .rightSide__box {
     width: 40%;
   }
 }

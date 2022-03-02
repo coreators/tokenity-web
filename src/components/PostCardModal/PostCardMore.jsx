@@ -48,7 +48,7 @@ export default NiceModal.create(({ post }) => {
                       Delete Post
                     </button>
                   )}
-                  <button className={styles.btn} onClick={modal.hide}>
+                  <button className={styles.btn} onClick={modal.remove}>
                     Cancel
                   </button>
                 </div>

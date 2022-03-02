@@ -191,7 +191,7 @@ const Home = () => {
 
       <div className="home-box__content">
         {/* 'add new post' section */}
-        {userData.isAuth ? (
+        {/* {userData.isAuth ? (
           <div
             className="home-box__addNewPostWrapper"
             style={{
@@ -202,7 +202,7 @@ const Home = () => {
           </div>
         ) : (
           ""
-        )}
+        )} */}
 
         {/* 'pinned post' section */}
         {/* <PinnedPost pinnedPost={pinnedPost} PinnedPostLoad={PinnedPostLoad} /> */}

@@ -82,8 +82,8 @@ const English = {
   notifications: {
     pageTitle: "Notifications | Tokenity",
     title: "Notifications",
-    likeHint: "liked your Tweet",
-    commentHint: "commented on your Tweet",
+    likeHint: "liked your Post",
+    commentHint: "commented on your Post",
     addFriendHint: "followed",
     emptyHint: "You don't have any notifications yet",
   },
