@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 // style file
 import "./Navbar.scss";
+import TokenityLogo from "../../assets/ci/Tokenity_Logo_white.svg";
 
 // context (global state)
 import { ThemeContext } from "../../context/ThemeContext";
@@ -68,7 +69,8 @@ const Navbar = () => {
           <div className="Navbar__box">
             <div className="Navbar__box__logo">
               <div className="Navbar__box__logo__box">
-                <svg
+                <img alt="Tokenity" src={TokenityLogo} />
+                {/* <svg
                   viewBox="0 0 56 56"
                   className="logo__svg"
                   style={{ fill: `${theme.logo}` }}
@@ -79,7 +81,7 @@ const Navbar = () => {
                     <circle cx="28.1" cy="10" r="6" />
                     <circle cx="40.1" cy="22" r="6" />
                   </g>
-                </svg>
+                </svg> */}
               </div>
             </div>
             {/* -------------- Start Tabs -------------- */}

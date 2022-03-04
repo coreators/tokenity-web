@@ -48,6 +48,7 @@ const Notifications = lazy(() => import("./pages/Notifications/Notifications"));
 const Page404 = lazy(() => import("./pages/Page404/Page404"));
 const Wallet = lazy(() => import("./pages/Wallet/Wallet"));
 const Settings = lazy(() => import("./pages/Settings/Settings"));
+const Trends = lazy(() => import("./pages/Trends/Trends"));
 
 /**
  * To solve CROS origin problem:
@@ -196,6 +197,7 @@ function App() {
                           path="/notifications"
                           element={<Notifications />}
                         />
+                        <Route path="/trends" element={<Trends />} />
                         <Route path="/wallet" element={<Wallet />} />
                         <Route path="/settings" element={<Settings />} />
                         <Route path="/login" element={<Login />} />

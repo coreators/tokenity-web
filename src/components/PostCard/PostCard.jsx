@@ -54,15 +54,14 @@ const PostCard = ({ post }) => {
 
   const deletePostConfirm = () => {
     let confirm = window.confirm(language.postDetails.confirmDeletePost);
-
     if (confirm) {
       deletePost();
     }
   };
   const showModal = () => {
     NiceModal.show("postcard-more", { post }).then((result) => {
-      // do something if the task in the modal finished.
       if (result.type === "delete") {
+        NiceModal.remove("postcard-more");
         deletePostConfirm();
       }
     });

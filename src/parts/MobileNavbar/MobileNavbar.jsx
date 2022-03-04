@@ -14,6 +14,8 @@ import SignupButton from "../../components/Buttons/SignupButton";
 import TokenityBtnNavbar from "../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar";
 import UserImage from "../CurrentUser/UserImage";
 
+// import TrendUpIcon from "../../assets/IconsSvg2/trending_up_black_24dp.svg";
+
 const MobileNavbar = () => {
   // ******* start global state ******* //
 
@@ -42,8 +44,8 @@ const MobileNavbar = () => {
       if (userNotifications && userNotifications.length > 0) {
         userNotifications.filter((not) => not.read === false).length > 0
           ? setNotsCount(
-            userNotifications.filter((not) => not.read === false).length
-          )
+              userNotifications.filter((not) => not.read === false).length
+            )
           : setNotsCount(0);
       } else {
         setNotsCount(0);
@@ -59,11 +61,7 @@ const MobileNavbar = () => {
 
   return (
     <div className="MobileNavber">
-      <div
-        className="MobileNavber__main"
-        style={{
-        }}
-      >
+      <div className="MobileNavber__main" style={{}}>
         {userData.isAuth ? (
           <Fragment>
             <div className="MobileNavber__box__formSubmitButton">
@@ -81,10 +79,11 @@ const MobileNavbar = () => {
                           isActive.home ? "fas fa-home-alt" : "fal fa-home-alt"
                         }
                         style={{
-                          color: `${isActive.home
-                            ? theme.mainColor
-                            : theme.mobileNavIcon
-                            }`,
+                          color: `${
+                            isActive.home
+                              ? theme.mainColor
+                              : theme.mobileNavIcon
+                          }`,
                         }}
                       ></i>
                     </span>
@@ -102,10 +101,11 @@ const MobileNavbar = () => {
                           isActive.notifications ? "fas fa-bell" : "fal fa-bell"
                         }
                         style={{
-                          color: `${isActive.notifications
-                            ? theme.mainColor
-                            : theme.mobileNavIcon
-                            }`,
+                          color: `${
+                            isActive.notifications
+                              ? theme.mainColor
+                              : theme.mobileNavIcon
+                          }`,
                         }}
                       ></i>
                       {notsCount > 0 && (
@@ -123,6 +123,28 @@ const MobileNavbar = () => {
                   </Link>
                 </div>
 
+                {/* Trending Tab */}
+                <div className="MobileNavber__box__tab">
+                  <Link to={"/trends/"} onClick={() => setPage("trends")}>
+                    <span className="MobileNavber__box__tab__icon">
+                      <i
+                        className={
+                          isActive.trends
+                            ? "fas fa-chart-line"
+                            : "fal fa-chart-line"
+                        }
+                        style={{
+                          color: `${
+                            isActive.trends
+                              ? theme.mainColor
+                              : theme.mobileNavIcon
+                          }`,
+                        }}
+                      ></i>
+                    </span>
+                  </Link>
+                </div>
+
                 {/* Wallet Tab */}
                 <div className="MobileNavber__box__tab">
                   <Link to={"/wallet/"} onClick={() => setPage("wallet")}>
@@ -132,17 +154,18 @@ const MobileNavbar = () => {
                           isActive.wallet ? "fas fa-wallet" : "fal fa-wallet"
                         }
                         style={{
-                          color: `${isActive.wallet
-                            ? theme.mainColor
-                            : theme.mobileNavIcon
-                            }`,
+                          color: `${
+                            isActive.wallet
+                              ? theme.mainColor
+                              : theme.mobileNavIcon
+                          }`,
                         }}
                       ></i>
                     </span>
                   </Link>
                 </div>
                 {/* More Tab */}
-                <div className="MobileNavber__box__tab">
+                {/* <div className="MobileNavber__box__tab">
                   <Link to={"/settings"} onClick={() => setPage("settings")}>
                     <span className="MobileNavber__box__tab__icon">
                       <i
@@ -160,7 +183,7 @@ const MobileNavbar = () => {
                       ></i>
                     </span>
                   </Link>
-                </div>
+                </div> */}
                 {/* Profile Tab */}
                 <div className="MobileNavber__box__tab">
                   {/* <Link
@@ -186,7 +209,6 @@ const MobileNavbar = () => {
                     onClick={() => setPage("profile")}
                   >
                     <UserImage />
-
                   </Link>
                 </div>
               </div>
