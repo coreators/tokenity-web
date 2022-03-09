@@ -1,25 +1,25 @@
-import { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import moment from "moment";
+import moment from 'moment';
 
 // style
-import "./Notifications.scss";
+import './Notifications.scss';
 
 // assets
-import Empty from "../../assets/Images/empty.svg";
-import DefaultAvatar from "../../assets/Images/default_pp.png";
+import Empty from '../../assets/Images/empty.svg';
+import DefaultAvatar from '../../assets/Images/default_pp.png';
 
 // api service
-import UserService from "../../services/UserService";
+import UserService from '../../services/UserService';
 
 // component
-import CheckVerifiedUserName from "../../components/CheckVerifiedUserName";
+import CheckVerifiedUserName from '../../components/CheckVerifiedUserName';
 
 // context (global state)
-import { ThemeContext } from "../../context/ThemeContext";
-import { LanguageContext } from "../../context/LanguageContext";
-import UserContext from "../../context/UserContext";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import UserContext from '../../context/UserContext';
 
 const Notifications = () => {
   // ******* start global state *******//
@@ -73,11 +73,11 @@ const Notifications = () => {
             });
             // update user's Notifications in cache
             let cachedUserData = JSON.parse(
-              window.sessionStorage.getItem("CacheUserData")
+              window.sessionStorage.getItem('CacheUserData')
             );
             if (cachedUserData) {
               window.sessionStorage.setItem(
-                "CacheUserData",
+                'CacheUserData',
                 JSON.stringify({
                   ...cachedUserData,
                   user: {
@@ -102,7 +102,7 @@ const Notifications = () => {
 
   return (
     <div
-      className="notificationsBox"
+      className="notificationsBox home-box"
       style={{ background: `${theme.background}` }}
     >
       <div className="notificationsBox__title">
@@ -118,7 +118,7 @@ const Notifications = () => {
         {notifications.length > 0 ? (
           notifications.map((Not) => {
             let icon, text;
-            if (Not.type === "like") {
+            if (Not.type === 'like') {
               text = language.notifications.likeHint;
               icon = (
                 <i
@@ -130,19 +130,19 @@ const Notifications = () => {
                   }}
                 ></i>
               );
-            } else if (Not.type === "comment") {
+            } else if (Not.type === 'comment') {
               text = language.notifications.commentHint;
               icon = (
                 <i
                   className="fas fa-comment"
                   style={{
-                    color: "#17bf63",
+                    color: '#17bf63',
                     backgroundColor: theme.foreground,
                     border: `2px solid ${theme.background}`,
                   }}
                 ></i>
               );
-            } else if (Not.type === "addFriend") {
+            } else if (Not.type === 'addFriend') {
               text = language.notifications.addFriendHint;
               icon = (
                 <i
@@ -158,9 +158,9 @@ const Notifications = () => {
             return (
               <Link
                 to={
-                  Not.type === "like" || Not.type === "comment"
-                    ? "/posts/" + Not.postId
-                    : "/users/" + Not.sender
+                  Not.type === 'like' || Not.type === 'comment'
+                    ? '/posts/' + Not.postId
+                    : '/users/' + Not.sender
                 }
                 key={Not.createdAt}
                 className="link text-decoration-none"

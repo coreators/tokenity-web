@@ -1,12 +1,6 @@
-@import "../../style/CssVariables.scss";
+@import '../../style/CssVariables.scss';
 
 .notificationsBox {
-  height: auto;
-  width: 45%;
-  margin-left: 25%;
-  overflow: auto;
-  padding-bottom: 80px;
-
   &__title {
     padding: 15px 10px;
     height: 53px;

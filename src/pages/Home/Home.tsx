@@ -1,25 +1,25 @@
-import { useState, useContext, useEffect, Fragment } from "react";
+import { useState, useContext, useEffect, Fragment } from 'react';
 // import { useNavigate } from "react-router-dom";
 
-// style
-import "./Home.scss";
 // Global vars import
-import variables from "../../style/CssVariables.scss";
+import variables from '../../style/CssVariables.scss';
 
 // api service
-import PostService from "../../services/PostService";
+import PostService from '../../services/PostService';
 
 // context (global state)
-import { ThemeContext } from "../../context/ThemeContext";
-import { LanguageContext } from "../../context/LanguageContext";
-import UserContext from "../../context/UserContext";
-import PostsContext from "../../context/PostsContext";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import UserContext from '../../context/UserContext';
+import PostsContext from '../../context/PostsContext';
 
 // components
-import PostCard from "../../components/PostCard/PostCard";
-import Spinner from "../../components/Spinner/Spinner";
+import PostCard from '../../components/PostCard/PostCard';
+import Spinner from '../../components/Spinner/Spinner';
 // import WhoToAdd from '../../parts/WhoToAdd/WhoToAdd';
-import AddNewPost from "../../parts/AddNewPost/AddNewPost";
+// import AddNewPost from '../../parts/AddNewPost/AddNewPost';
+
+import Stories from '../../components/Story/Stories';
 // import PinnedPost from "../../parts/PinnedPost/PinnedPost";
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
   var language = isEnglish ? english : korean;
 
   // user context
-  const { userData } = useContext(UserContext);
+  // const { userData } = useContext(UserContext);
 
   // posts context
   const { posts, setPostsData } = useContext(PostsContext);
@@ -42,7 +42,7 @@ const Home = () => {
   // ******* end global state ******* //
 
   // local state
-  const [lastKey, setKey] = useState("");
+  const [lastKey, setKey] = useState('');
   const [posts_loading, setPostsLoading] = useState(false);
   const [nextPosts_loading, setNextPostsLoading] = useState(false);
   // const [pinnedPost, setPinnedPost] = useState({});
@@ -59,8 +59,8 @@ const Home = () => {
     let mounted = true;
 
     // get cache (posts)
-    let cachedPosts = JSON.parse(window.sessionStorage.getItem("posts"));
-    let cachedLastPostKey = window.sessionStorage.getItem("lastKey");
+    let cachedPosts = JSON.parse(window.sessionStorage.getItem('posts'));
+    let cachedLastPostKey = window.sessionStorage.getItem('lastKey');
 
     if (mounted) {
       let fun = async () => {
@@ -98,10 +98,10 @@ const Home = () => {
               setPostsLoading(false);
               // add posts and last post's key to session storage (cache)
               window.sessionStorage.setItem(
-                "posts",
+                'posts',
                 JSON.stringify(res.data.posts)
               );
-              window.sessionStorage.setItem("lastKey", res.data.lastKey);
+              window.sessionStorage.setItem('lastKey', res.data.lastKey);
             })
             .catch((err) => {
               console.log(err);
@@ -111,7 +111,7 @@ const Home = () => {
       };
       fun();
     }
-    return () => (mounted = false);
+    // return () => (mounted = false);
   }, [setPostsData]);
 
   /**
@@ -132,10 +132,10 @@ const Home = () => {
           // add new fetched posts to cached posts in session storage (cache),
           // and last post's key to session storage (cache).
           window.sessionStorage.setItem(
-            "posts",
+            'posts',
             JSON.stringify(posts.concat(res.data.posts))
           );
-          window.sessionStorage.setItem("lastKey", res.data.lastKey);
+          window.sessionStorage.setItem('lastKey', res.data.lastKey);
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -180,13 +180,13 @@ const Home = () => {
           background: `${theme.background}`,
         }}
       >
-        <h1
+        {/* <h1
           style={{
             color: `${theme.typoMain}`,
           }}
         >
           {language.home.title}
-        </h1>
+        </h1> */}
       </div>
 
       <div className="home-box__content">
@@ -204,10 +204,13 @@ const Home = () => {
           ""
         )} */}
 
+        <Stories />
+
         {/* 'pinned post' section */}
         {/* <PinnedPost pinnedPost={pinnedPost} PinnedPostLoad={PinnedPostLoad} /> */}
 
         {/* 'posts first fetch' section */}
+
         <div className="home-box__posts">{feedPosts}</div>
 
         {/* 'who to add' section, for mobile view */}
@@ -215,7 +218,7 @@ const Home = () => {
         {/* {userData.isAuth && window.screen.width <= 991 ? <WhoToAdd /> : ''} */}
 
         {/* 'button to fetch more posts' section */}
-        <div className="home-box__spinner" style={{ textAlign: "center" }}>
+        <div className="home-box__spinner" style={{ textAlign: 'center' }}>
           {nextPosts_loading && !posts_loading ? (
             <Spinner />
           ) : lastKey.length > 0 ? (
@@ -224,7 +227,7 @@ const Home = () => {
               onClick={() => fetchMorePosts(lastKey)}
               style={{
                 backgroundColor: theme.mainColor,
-                color: "#fff",
+                color: '#fff',
                 borderRadius: variables.radius,
               }}
             >
@@ -234,7 +237,7 @@ const Home = () => {
               </span>
             </button>
           ) : (
-            ""
+            ''
           )}
         </div>
 
@@ -245,14 +248,14 @@ const Home = () => {
         >
           {!nextPosts_loading && lastKey.length === 0 && !posts_loading ? (
             <span>
-              {language.home.bottomHint}{" "}
+              {language.home.bottomHint}{' '}
               <i
                 className="fas fa-stars"
                 style={{ color: theme.mainColor }}
               ></i>
             </span>
           ) : (
-            ""
+            ''
           )}
         </div>
       </div>

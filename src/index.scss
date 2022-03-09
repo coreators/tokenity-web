@@ -11,14 +11,131 @@ $input-border-color: #272728;
 $input-group-addon-bg: #2c2c2d;
 
 //-------- css reset ---------//
-@import "./style/css_resets/normalize.scss";
-@import "./style/css_resets/reset.local.scss";
-@import "~bootstrap/scss/bootstrap.scss";
+@import './style/css_resets/normalize.scss';
+@import './style/css_resets/reset.local.scss';
+@import '~bootstrap/scss/bootstrap.scss';
 
 .App {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
-  font-family: system-ui, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: system-ui, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.home-box {
+  height: auto;
+  width: 45%;
+  max-width: 620px;
+  margin-left: 30%;
+  padding-bottom: 60px;
+
+  &__content {
+    margin-top: 90px;
+  }
+
+  &__addNewPostWrapper {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 42px;
+  }
+
+  &__SettingsButton {
+    font-size: 15px;
+    padding: 0 14px;
+    margin-top: 20px;
+    height: 40px;
+    border-radius: 12px;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &__icon {
+      margin-right: 5px;
+    }
+  }
+
+  &__note {
+    text-align: center;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 19px;
+
+    i {
+      font-size: 20px;
+    }
+  }
+
+  &__spinner {
+    .loader__box {
+      margin-top: 0;
+    }
+  }
+
+  .whoToAdd {
+    display: none;
+
+    &__title {
+      h2 {
+        padding: 15px 10px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+  .home-box {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 100px;
+    padding-bottom: 0;
+    &__title {
+      width: 100%;
+    }
+
+    .whoToAdd {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 501px) and (max-width: 991px) {
+  /* For tablet: */
+  .home-box {
+    width: 75%;
+    margin-left: 15%;
+    &__title {
+      width: 75%;
+    }
+    .whoToAdd {
+      display: block;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1280px) {
+  /* For small lab: */
+  .home-box {
+    width: 50%;
+    margin-left: 10%;
+    &__title {
+      width: 50%;
+    }
+  }
+}
+
+.pc_only {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .pc_only {
+    display: block;
+  }
 }

@@ -1,16 +1,17 @@
-import React, { useContext, useEffect, Fragment } from "react";
+import React, { useContext, useEffect, Fragment } from 'react';
 
 // style file
-import "./RightSide.scss";
+import './RightSide.scss';
 
 // context (global state)
-import UserContext from "../../context/UserContext";
+import UserContext from '../../context/UserContext';
 
 // libraries
 // import WhoToAdd from '../WhoToAdd/WhoToAdd';
-import Join from "../Join/Join";
+import Join from '../Join/Join';
+import TrendWidget from '../../components/TrendWidget/TrendWidget';
 // import CurrentUser from "../CurrentUser/CurrentUser";
-import UserProfileCard from "../CurrentUser/UserProfileCard";
+// import UserProfileCard from '../CurrentUser/UserProfileCard';
 
 const RightSide = () => {
   // ******* start global state ******* //
@@ -26,7 +27,8 @@ const RightSide = () => {
       <div className="rightSide__box">
         {userData.isAuth && window.screen.width > 991 ? (
           <Fragment>
-            <UserProfileCard />
+            <TrendWidget />
+            {/* <UserProfileCard /> */}
 
             {/* <CurrentUser /> */}
             {/* <div

@@ -1,12 +1,6 @@
-@import "../../style/CssVariables.scss";
+@import '../../style/CssVariables.scss';
 
 .userProfile__main {
-  height: auto;
-  width: 45%;
-  margin-left: 25%;
-  overflow: auto;
-  height: auto;
-
   // page header
   &__title {
     padding: 5px 10px;
