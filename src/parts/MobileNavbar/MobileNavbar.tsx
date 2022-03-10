@@ -1,18 +1,18 @@
-import React, { useState, useContext, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 // style file
-import "./MobileNavbar.scss";
+import './MobileNavbar.scss';
 
 // context (global state)
-import { ThemeContext } from "../../context/ThemeContext";
-import UserContext from "../../context/UserContext";
+import { ThemeContext } from '../../context/ThemeContext';
+import UserContext from '../../context/UserContext';
 
 // components
-import LoginButton from "../../components/Buttons/LoginButton";
-import SignupButton from "../../components/Buttons/SignupButton";
-import TokenityBtnNavbar from "../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar";
-import UserImage from "../CurrentUser/UserImage";
+import LoginButton from '../../components/Buttons/LoginButton';
+import SignupButton from '../../components/Buttons/SignupButton';
+import TokenityBtnNavbar from '../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar';
+import UserImage from '../CurrentUser/UserImage';
 
 // import TrendUpIcon from "../../assets/IconsSvg2/trending_up_black_24dp.svg";
 
@@ -28,11 +28,20 @@ const MobileNavbar = () => {
 
   // ******* end global state ******* //
 
+  const defaultActive = {
+    home: false,
+    notifications: false,
+    profile: false,
+    settings: false,
+    wallet: false,
+    trends: false,
+  };
+
   // local state
   const [isActive, setActive] = useState({
-    home: true,
+    ...defaultActive,
   });
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState('home');
 
   // notification number
   const [notsCount, setNotsCount] = useState(0);
@@ -52,7 +61,7 @@ const MobileNavbar = () => {
       }
     }
 
-    setActive({ [page]: true });
+    setActive({ ...defaultActive, [page]: true });
   }, [page, userData.isAuth]);
 
   const clearCounter = () => {
@@ -72,11 +81,11 @@ const MobileNavbar = () => {
               <div className="MobileNavber__box__tabs">
                 {/* Home Tab */}
                 <div className="MobileNavber__box__tab">
-                  <Link to="/" onClick={() => setPage("home")}>
+                  <Link to="/" onClick={() => setPage('home')}>
                     <span className="MobileNavber__box__tab__icon">
                       <i
                         className={
-                          isActive.home ? "fas fa-home-alt" : "fal fa-home-alt"
+                          isActive.home ? 'fas fa-home-alt' : 'fal fa-home-alt'
                         }
                         style={{
                           color: `${
@@ -93,12 +102,12 @@ const MobileNavbar = () => {
                 <div className="MobileNavber__box__tab" onClick={clearCounter}>
                   <Link
                     to="/notifications"
-                    onClick={() => setPage("notifications")}
+                    onClick={() => setPage('notifications')}
                   >
                     <span className="MobileNavber__box__tab__icon">
                       <i
                         className={
-                          isActive.notifications ? "fas fa-bell" : "fal fa-bell"
+                          isActive.notifications ? 'fas fa-bell' : 'fal fa-bell'
                         }
                         style={{
                           color: `${
@@ -113,7 +122,7 @@ const MobileNavbar = () => {
                           style={{
                             backgroundColor: theme.mainColor,
                             border: `2px solid ${theme.background}`,
-                            color: "#fff",
+                            color: '#fff',
                           }}
                         >
                           {notsCount}
@@ -125,13 +134,13 @@ const MobileNavbar = () => {
 
                 {/* Trending Tab */}
                 <div className="MobileNavber__box__tab">
-                  <Link to={"/trends/"} onClick={() => setPage("trends")}>
+                  <Link to={'/trends/'} onClick={() => setPage('trends')}>
                     <span className="MobileNavber__box__tab__icon">
                       <i
                         className={
                           isActive.trends
-                            ? "fas fa-chart-line"
-                            : "fal fa-chart-line"
+                            ? 'fas fa-chart-line'
+                            : 'fal fa-chart-line'
                         }
                         style={{
                           color: `${
@@ -147,11 +156,11 @@ const MobileNavbar = () => {
 
                 {/* Wallet Tab */}
                 <div className="MobileNavber__box__tab">
-                  <Link to={"/wallet/"} onClick={() => setPage("wallet")}>
+                  <Link to={'/wallet/'} onClick={() => setPage('wallet')}>
                     <span className="MobileNavber__box__tab__icon">
                       <i
                         className={
-                          isActive.wallet ? "fas fa-wallet" : "fal fa-wallet"
+                          isActive.wallet ? 'fas fa-wallet' : 'fal fa-wallet'
                         }
                         style={{
                           color: `${
@@ -205,8 +214,8 @@ const MobileNavbar = () => {
                     </span>
                   </Link> */}
                   <Link
-                    to={"/users/" + userData.user.credentials.userName}
-                    onClick={() => setPage("profile")}
+                    to={'/users/' + userData.user.credentials.userName}
+                    onClick={() => setPage('profile')}
                   >
                     <UserImage />
                   </Link>

@@ -1,17 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // style file
-import "./Navbar.scss";
-import TokenityLogo from "../../assets/ci/Tokenity_Logo_white.svg";
+import './Navbar.scss';
+import TokenityLogo from '../../assets/ci/Tokenity_Logo_white.svg';
 
 // context (global state)
-import { ThemeContext } from "../../context/ThemeContext";
-import { LanguageContext } from "../../context/LanguageContext";
-import UserContext from "../../context/UserContext";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import UserContext from '../../context/UserContext';
 
 // components
-import TokenityBtnNavbar from "../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar";
+import TokenityBtnNavbar from '../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar';
+import UserProfileCard from '../CurrentUser/UserProfileCard';
 
 const Navbar = () => {
   // ******* start global state ******* //
@@ -29,9 +30,18 @@ const Navbar = () => {
 
   // ******* end global state ******* //
 
+  const defaultActive = {
+    home: false,
+    notifications: false,
+    profile: false,
+    settings: false,
+    wallet: false,
+    trend: false,
+  };
+
   // local state
-  const [isActive, setActive] = useState({ home: true });
-  const [page, setPage] = useState("home");
+  const [isActive, setActive] = useState({ ...defaultActive });
+  const [page, setPage] = useState('home');
 
   const [notsCount, setNotsCount] = useState(0);
 
@@ -50,7 +60,7 @@ const Navbar = () => {
       }
     }
 
-    setActive({ [page]: true });
+    setActive({ ...defaultActive, [page]: true });
   }, [page, userData.isAuth]);
 
   const clearCounter = () => {
@@ -70,20 +80,12 @@ const Navbar = () => {
             <div className="Navbar__box__logo">
               <div className="Navbar__box__logo__box">
                 <img alt="Tokenity" src={TokenityLogo} />
-                {/* <svg
-                  viewBox="0 0 56 56"
-                  className="logo__svg"
-                  style={{ fill: `${theme.logo}` }}
-                >
-                  <g>
-                    <rect x="10.1" y="16" width="12" height="12" />
-                    <path d="M34.1,52c-12,0-12-12-12-12V28h12v9c0,1.7,1.3,3,3,3h9v12H34.1" />
-                    <circle cx="28.1" cy="10" r="6" />
-                    <circle cx="40.1" cy="22" r="6" />
-                  </g>
-                </svg> */}
               </div>
             </div>
+            <div className="pc_only">
+              <UserProfileCard />
+            </div>
+
             {/* -------------- Start Tabs -------------- */}
             <div className="Navbar__box__tabs">
               {/* Home Tab */}
@@ -91,13 +93,13 @@ const Navbar = () => {
                 <Link
                   to="/"
                   onClick={() => {
-                    setPage("home");
+                    setPage('home');
                   }}
                 >
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
-                        isActive.home ? "fas fa-home-alt" : "fal fa-home-alt"
+                        isActive.home ? 'fas fa-home-alt' : 'fal fa-home-alt'
                       }
                       style={{
                         color: `${
@@ -118,69 +120,25 @@ const Navbar = () => {
                   </span>
                 </Link>
               </div>
-              {/* Notification Tab */}
-              <div className="Navbar__box__tab" onClick={clearCounter}>
+
+              {/* Home Tab */}
+              <div className="Navbar__box__tab">
                 <Link
-                  to="/notifications"
+                  to="/trends/"
                   onClick={() => {
-                    setPage("notifications");
+                    setPage('trend');
                   }}
                 >
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
-                        isActive.notifications
-                          ? "fas fa-bell Navbar__box__tab__icon--not"
-                          : "fal fa-bell Navbar__box__tab__icon--not"
+                        isActive.trend
+                          ? 'fas fa-chart-line'
+                          : 'fal fa-chart-line'
                       }
                       style={{
                         color: `${
-                          isActive.notifications
-                            ? theme.mainColor
-                            : theme.typoMain
-                        }`,
-                      }}
-                    ></i>
-                    {notsCount > 0 && (
-                      <span
-                        style={{
-                          backgroundColor: theme.mainColor,
-                          border: `2px solid ${theme.background}`,
-                          color: "#fff",
-                        }}
-                      >
-                        {notsCount}
-                      </span>
-                    )}
-                  </span>
-                  <span
-                    className="Navbar__box__tab__text"
-                    style={{
-                      color: `${
-                        isActive.notifications
-                          ? theme.mainColor
-                          : theme.typoMain
-                      }`,
-                    }}
-                  >
-                    {language.navbar.notifications}
-                  </span>
-                </Link>
-              </div>
-              {/* Profile Tab */}
-              <div className="Navbar__box__tab">
-                <Link
-                  to={"/users/" + userData.user.credentials.userName}
-                  onClick={() => setPage("profile")}
-                >
-                  <span className="Navbar__box__tab__icon">
-                    <i
-                      className={
-                        isActive.profile ? "fas fa-user" : "fal fa-user"
-                      }
-                      style={{
-                        color: `${
-                          isActive.profile ? theme.mainColor : theme.typoMain
+                          isActive.trend ? theme.mainColor : theme.typoMain
                         }`,
                       }}
                     ></i>
@@ -189,22 +147,22 @@ const Navbar = () => {
                     className="Navbar__box__tab__text"
                     style={{
                       color: `${
-                        isActive.profile ? theme.mainColor : theme.typoMain
+                        isActive.trend ? theme.mainColor : theme.typoMain
                       }`,
                     }}
                   >
-                    {language.navbar.profile}
+                    {language.navbar.trend}
                   </span>
                 </Link>
               </div>
 
               {/* Wallet Tab */}
               <div className="Navbar__box__tab">
-                <Link to={"/wallet/"} onClick={() => setPage("wallet")}>
+                <Link to={'/wallet/'} onClick={() => setPage('wallet')}>
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
-                        isActive.wallet ? "fas fa-wallet" : "fal fa-wallet"
+                        isActive.wallet ? 'fas fa-wallet' : 'fal fa-wallet'
                       }
                       style={{
                         color: `${
@@ -225,15 +183,64 @@ const Navbar = () => {
                   </span>
                 </Link>
               </div>
+              {/* Notification Tab */}
+              <div className="Navbar__box__tab" onClick={clearCounter}>
+                <Link
+                  to="/notifications"
+                  onClick={() => {
+                    setPage('notifications');
+                  }}
+                >
+                  <span className="Navbar__box__tab__icon">
+                    <i
+                      className={
+                        isActive.notifications
+                          ? 'fas fa-bell Navbar__box__tab__icon--not'
+                          : 'fal fa-bell Navbar__box__tab__icon--not'
+                      }
+                      style={{
+                        color: `${
+                          isActive.notifications
+                            ? theme.mainColor
+                            : theme.typoMain
+                        }`,
+                      }}
+                    ></i>
+                    {notsCount > 0 && (
+                      <span
+                        style={{
+                          backgroundColor: theme.mainColor,
+                          border: `2px solid ${theme.background}`,
+                          color: '#fff',
+                        }}
+                      >
+                        {notsCount}
+                      </span>
+                    )}
+                  </span>
+                  <span
+                    className="Navbar__box__tab__text"
+                    style={{
+                      color: `${
+                        isActive.notifications
+                          ? theme.mainColor
+                          : theme.typoMain
+                      }`,
+                    }}
+                  >
+                    {language.navbar.notifications}
+                  </span>
+                </Link>
+              </div>
               {/* More Tab */}
-              <div className="Navbar__box__tab">
-                <Link to={"/settings/"} onClick={() => setPage("settings")}>
+              {/* <div className="Navbar__box__tab">
+                <Link to={'/settings/'} onClick={() => setPage('settings')}>
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
                         isActive.settings
-                          ? "fas fa-ellipsis-h-alt"
-                          : "fal fa-ellipsis-h-alt"
+                          ? 'fas fa-ellipsis-h-alt'
+                          : 'fal fa-ellipsis-h-alt'
                       }
                       style={{
                         color: `${
@@ -253,7 +260,7 @@ const Navbar = () => {
                     {language.navbar.more}
                   </span>
                 </Link>
-              </div>
+              </div> */}
               {/* Twittern button Tab */}
               <div className="Navbar__box__tab --formSubmitButton">
                 <TokenityBtnNavbar />
@@ -262,7 +269,7 @@ const Navbar = () => {
             {/* -------------- End Tabs -------------- */}
           </div>
         ) : (
-          ""
+          ''
         )}
       </div>
     </div>

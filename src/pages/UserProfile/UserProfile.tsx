@@ -1,37 +1,37 @@
-import React, { useState, useContext, useEffect, Fragment } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useState, useContext, useEffect, Fragment } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // style
-import "./UserProfile.scss";
+import './UserProfile.scss';
 
 // assets
-import Empty from "../../assets/Images/empty.svg";
-import DefaultAvatar from "../../assets/Images/default_pp.png";
-import DefaultCover from "../../assets/Images/default_cp.png";
+import Empty from '../../assets/Images/empty.svg';
+import DefaultAvatar from '../../assets/Images/default_pp.png';
+import DefaultCover from '../../assets/Images/default_cp.png';
 
 // libraries
-import moment from "moment";
-import Linkify from "linkify-react";
+import moment from 'moment';
+import Linkify from 'linkify-react';
 
 // api service
-import UserService from "../../services/UserService";
+import UserService from '../../services/UserService';
 
 // component
-import ImageModal from "../../components/ImageModal/ImageModal";
-import PostCard from "../../components/PostCard/PostCard";
-import EditProfileImageButton from "../../components/Buttons/EditProfileImageButton/EditProfileImageButton";
-import EditCoverImageButton from "../../components/Buttons/EditCoverImageButton/EditCoverImageButton";
-import EditProfile from "../../components/Buttons/EditProfile/EditProfile";
-import FriendsModal from "../../components/FriendsModal/FriendsModal";
-import AddFriendButton from "../../components/Buttons/AddFriendButton/AddFriendButton";
-import CheckVerifiedUserName from "../../components/CheckVerifiedUserName";
-import Spinner from "../../components/Spinner/Spinner";
+import ImageModal from '../../components/ImageModal/ImageModal';
+import PostCard from '../../components/PostCard/PostCard';
+import EditProfileImageButton from '../../components/Buttons/EditProfileImageButton/EditProfileImageButton';
+import EditCoverImageButton from '../../components/Buttons/EditCoverImageButton/EditCoverImageButton';
+import EditProfile from '../../components/Buttons/EditProfile/EditProfile';
+import FriendsModal from '../../components/FriendsModal/FriendsModal';
+import AddFriendButton from '../../components/Buttons/AddFriendButton/AddFriendButton';
+import CheckVerifiedUserName from '../../components/CheckVerifiedUserName';
+import Spinner from '../../components/Spinner/Spinner';
 
 // context (global state)
-import { ThemeContext } from "../../context/ThemeContext";
-import { LanguageContext } from "../../context/LanguageContext";
-import UserContext from "../../context/UserContext";
-import UserProfileContext from "../../context/UserProfileContext";
+import { ThemeContext } from '../../context/ThemeContext';
+import { LanguageContext } from '../../context/LanguageContext';
+import UserContext from '../../context/UserContext';
+import UserProfileContext from '../../context/UserProfileContext';
 
 const UserProfile = (props) => {
   const { userName } = useParams();
@@ -110,7 +110,7 @@ const UserProfile = (props) => {
       {userProfileData.user.location}
     </div>
   ) : (
-    ""
+    ''
   );
 
   const website = userProfileData.user.website ? (
@@ -126,10 +126,10 @@ const UserProfile = (props) => {
         target="_blank"
       >
         {userProfileData.user.website}
-      </a>{" "}
+      </a>{' '}
     </div>
   ) : (
-    ""
+    ''
   );
 
   // direct to post details page on click on post
@@ -165,25 +165,25 @@ const UserProfile = (props) => {
     userName === userData.user.credentials.userName ? (
       <EditProfileImageButton />
     ) : (
-      ""
+      ''
     )
   ) : (
-    ""
+    ''
   );
 
   const editCover = userData.isAuth ? (
     userName === userData.user.credentials.userName ? (
       <EditCoverImageButton />
     ) : (
-      ""
+      ''
     )
   ) : (
-    ""
+    ''
   );
 
   return (
     <div
-      className="userProfile__main"
+      className="userProfile__main home-box"
       style={{ background: `${theme.background}` }}
     >
       <div className="userProfile__main__title">
@@ -283,8 +283,8 @@ const UserProfile = (props) => {
                 }}
               >
                 <i className="fal fa-calendar-alt"></i>
-                {language.userProfile.joined}{" "}
-                {moment(userProfileData.user.createdAt).format("MMMM YYYY")}
+                {language.userProfile.joined}{' '}
+                {moment(userProfileData.user.createdAt).format('MMMM YYYY')}
               </div>
             </div>
             <FriendsModal />

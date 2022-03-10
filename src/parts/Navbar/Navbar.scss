@@ -1,11 +1,11 @@
-@import "../../style/CssVariables";
+@import '../../style/CssVariables';
 
 .Navbar {
   position: relative;
   z-index: 100;
   &__main {
     height: 100vh;
-    width: 25%;
+    width: 30%;
     position: fixed;
   }
 }
@@ -27,13 +27,14 @@
       img {
         position: absolute;
         height: 30px;
-        width: 160px;
+        width: 140px;
       }
     }
   }
 
   &__tabs {
     .Navbar__box__tab {
+      margin-top: 20px;
       margin-bottom: 20px;
       a {
         text-decoration: none;

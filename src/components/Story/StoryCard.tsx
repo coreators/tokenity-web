@@ -1,4 +1,4 @@
-import styles from "./StoryCard.module.scss";
+import styles from './StoryCard.module.scss';
 
 function StoryCard({ story }) {
   return (
@@ -6,6 +6,9 @@ function StoryCard({ story }) {
       className={styles.storyCard}
       style={{ backgroundImage: `url(${story.backImageUrl})` }}
     >
+      <div className={styles.profileImage}>
+        <img src={story.profileImageUrl} alt="profile" />
+      </div>
       <h6>{story.userName}</h6>
     </div>
   );
