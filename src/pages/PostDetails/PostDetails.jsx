@@ -96,7 +96,7 @@ const PostDetails = (props) => {
 
   return (
     <div
-      className="postDetails__main"
+      className="home-box"
       style={{
         background: `${theme.background}`,
       }}

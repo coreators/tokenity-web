@@ -1,12 +1,12 @@
 import React, { useContext, useState, Fragment } from "react";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // style file
 import "./AddNewPost.scss";
 
 // assets
-import default_pp from "../../assets/Images/default_pp.png";
+// import default_pp from "../../assets/Images/default_pp.png";
 
 // components
 import FormSubmitButton from "../../components/Buttons/FormSubmitButton/FormSubmitButton";
@@ -15,7 +15,7 @@ import AddNewPostInput from "./AddNewPostInput";
 // context (global state)
 import { ThemeContext } from "../../context/ThemeContext";
 import { LanguageContext } from "../../context/LanguageContext";
-import UserContext from "../../context/UserContext";
+// import UserContext from "../../context/UserContext";
 
 import { types, extraInputs } from "./constants";
 
@@ -31,7 +31,7 @@ const AddNewPost = ({ inputId, setOpen }) => {
   var language = isEnglish ? english : korean;
 
   // user context
-  const { userData } = useContext(UserContext);
+  // const { userData } = useContext(UserContext);
 
   // ******* end global state ******* //
 
@@ -120,26 +120,6 @@ const AddNewPost = ({ inputId, setOpen }) => {
   return (
     <div>
       <div className="addNewPost">
-        <div className="addNewPost__leftSide">
-          <div className="addNewPost__leftSide__imageBox">
-            <Link
-              to={
-                userData.isAuth
-                  ? "/users/" + userData.user.credentials.userName
-                  : "#"
-              }
-            >
-              <img
-                alt="profile"
-                src={
-                  userData.isAuth
-                    ? userData.user.credentials.profilePicture
-                    : default_pp
-                }
-              />
-            </Link>
-          </div>
-        </div>
         <div className="addNewPost__rightSide">
           <div className="addNewPost__rightSide__inputBox">
             <textarea

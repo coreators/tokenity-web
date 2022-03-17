@@ -1,4 +1,4 @@
-@import '../../style/CssVariables.scss';
+@import "../../style/CssVariables.scss";
 
 .userProfile__main {
   // page header
@@ -59,7 +59,7 @@
 
   // user data
   &__userDetails {
-    margin-top: 53px;
+    margin-top: 90px;
     margin-bottom: 80px;
 
     // cover image
@@ -83,11 +83,14 @@
     &__userData {
       position: relative;
       padding: 10px;
+      text-align: center;
 
       // user profile image line
       &__pp {
         position: absolute;
-        top: -50px;
+        top: -72px;
+        left: 50%;
+        margin-left: -72px;
 
         &__userImageBox {
           width: 134px;
@@ -125,6 +128,7 @@
 
       // userName
       &__userName {
+        text-align: center;
         margin-top: 30px;
         margin-bottom: 10px;
         h2 {
@@ -140,6 +144,7 @@
       // bio
       &__bio {
         margin-bottom: 10px;
+        text-align: center;
         p {
           font-size: 15px;
           margin: 0;
@@ -148,9 +153,6 @@
 
       //extra data
       &__extraData {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
         margin-bottom: 10px;
 
         div {
@@ -185,6 +187,10 @@
 
     &__posts {
       /* start no posts box*/
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px;
       .posts__empty {
         text-align: center;
         padding: 30px 10px 0;
@@ -211,22 +217,15 @@
     &__title {
       width: 100%;
     }
+    &__userDetails {
+      margin-top: 0;
+    }
     &__userDetails__headerImageBox {
       max-height: 120px;
 
       &__image {
         height: 120px;
       }
-    }
-    &__userDetails__userData__pp {
-      top: -25px;
-      &__userImageBox {
-        width: 68px;
-        height: 68px;
-      }
-    }
-    &__userDetails__userData__userName {
-      margin-top: -8px;
     }
   }
 }

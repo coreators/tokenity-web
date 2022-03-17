@@ -24,6 +24,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 import LikeButton from "../Buttons/LikeButton";
 import CommentButton from "../Buttons/CommentButton";
 import CheckVerifiedUserName from "../CheckVerifiedUserName";
+import AddComment from "../AddComment/AddComment";
 
 // api service
 import PostService from "../../services/PostService";
@@ -204,6 +205,9 @@ const PostCard = ({ post }) => {
           </Link>
           <LikeButton post={post} />
         </div>
+
+        {/* add comment input */}
+        {userData.isAuth ? <AddComment postId={post.postId} /> : ""}
       </div>
     </div>
   );

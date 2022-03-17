@@ -1,26 +1,28 @@
-import { useState, useContext, useEffect, Fragment } from 'react';
+import { useState, useContext, useEffect, Fragment } from "react";
 // import { useNavigate } from "react-router-dom";
 
 // Global vars import
-import variables from '../../style/CssVariables.scss';
+import variables from "../../style/CssVariables.scss";
 
 // api service
-import PostService from '../../services/PostService';
+import PostService from "../../services/PostService";
 
 // context (global state)
-import { ThemeContext } from '../../context/ThemeContext';
-import { LanguageContext } from '../../context/LanguageContext';
-import UserContext from '../../context/UserContext';
-import PostsContext from '../../context/PostsContext';
+import { ThemeContext } from "../../context/ThemeContext";
+import { LanguageContext } from "../../context/LanguageContext";
+// import UserContext from "../../context/UserContext";
+import PostsContext from "../../context/PostsContext";
 
 // components
-import PostCard from '../../components/PostCard/PostCard';
-import Spinner from '../../components/Spinner/Spinner';
+import PostCard from "../../components/PostCard/PostCard";
+import Spinner from "../../components/Spinner/Spinner";
 // import WhoToAdd from '../../parts/WhoToAdd/WhoToAdd';
 // import AddNewPost from '../../parts/AddNewPost/AddNewPost';
 
-import Stories from '../../components/Story/Stories';
+import Stories from "../../components/Story/Stories";
 // import PinnedPost from "../../parts/PinnedPost/PinnedPost";
+
+import TokenityLogo from "../../assets/ci/Tokenity_Logo_white.svg";
 
 const Home = () => {
   // ******* start global state ******* //
@@ -42,7 +44,7 @@ const Home = () => {
   // ******* end global state ******* //
 
   // local state
-  const [lastKey, setKey] = useState('');
+  const [lastKey, setKey] = useState("");
   const [posts_loading, setPostsLoading] = useState(false);
   const [nextPosts_loading, setNextPostsLoading] = useState(false);
   // const [pinnedPost, setPinnedPost] = useState({});
@@ -59,8 +61,8 @@ const Home = () => {
     let mounted = true;
 
     // get cache (posts)
-    let cachedPosts = JSON.parse(window.sessionStorage.getItem('posts'));
-    let cachedLastPostKey = window.sessionStorage.getItem('lastKey');
+    let cachedPosts = JSON.parse(window.sessionStorage.getItem("posts"));
+    let cachedLastPostKey = window.sessionStorage.getItem("lastKey");
 
     if (mounted) {
       let fun = async () => {
@@ -98,10 +100,10 @@ const Home = () => {
               setPostsLoading(false);
               // add posts and last post's key to session storage (cache)
               window.sessionStorage.setItem(
-                'posts',
+                "posts",
                 JSON.stringify(res.data.posts)
               );
-              window.sessionStorage.setItem('lastKey', res.data.lastKey);
+              window.sessionStorage.setItem("lastKey", res.data.lastKey);
             })
             .catch((err) => {
               console.log(err);
@@ -132,10 +134,10 @@ const Home = () => {
           // add new fetched posts to cached posts in session storage (cache),
           // and last post's key to session storage (cache).
           window.sessionStorage.setItem(
-            'posts',
+            "posts",
             JSON.stringify(posts.concat(res.data.posts))
           );
-          window.sessionStorage.setItem('lastKey', res.data.lastKey);
+          window.sessionStorage.setItem("lastKey", res.data.lastKey);
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -175,18 +177,12 @@ const Home = () => {
     <div className="home-box" style={{ background: `${theme.background}` }}>
       {/* page title */}
       <div
-        className="home-box__title"
+        className="home-box__title mobile_only"
         style={{
           background: `${theme.background}`,
         }}
       >
-        {/* <h1
-          style={{
-            color: `${theme.typoMain}`,
-          }}
-        >
-          {language.home.title}
-        </h1> */}
+        <img alt="Tokenity" src={TokenityLogo} width="130" />
       </div>
 
       <div className="home-box__content">
@@ -218,7 +214,7 @@ const Home = () => {
         {/* {userData.isAuth && window.screen.width <= 991 ? <WhoToAdd /> : ''} */}
 
         {/* 'button to fetch more posts' section */}
-        <div className="home-box__spinner" style={{ textAlign: 'center' }}>
+        <div className="home-box__spinner" style={{ textAlign: "center" }}>
           {nextPosts_loading && !posts_loading ? (
             <Spinner />
           ) : lastKey.length > 0 ? (
@@ -227,7 +223,7 @@ const Home = () => {
               onClick={() => fetchMorePosts(lastKey)}
               style={{
                 backgroundColor: theme.mainColor,
-                color: '#fff',
+                color: "#fff",
                 borderRadius: variables.radius,
               }}
             >
@@ -237,7 +233,7 @@ const Home = () => {
               </span>
             </button>
           ) : (
-            ''
+            ""
           )}
         </div>
 
@@ -248,14 +244,14 @@ const Home = () => {
         >
           {!nextPosts_loading && lastKey.length === 0 && !posts_loading ? (
             <span>
-              {language.home.bottomHint}{' '}
+              {language.home.bottomHint}{" "}
               <i
                 className="fas fa-stars"
                 style={{ color: theme.mainColor }}
               ></i>
             </span>
           ) : (
-            ''
+            ""
           )}
         </div>
       </div>
