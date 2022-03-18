@@ -1,6 +1,7 @@
 @import "../../style/CssVariables.scss";
 
-.form-select, .form-select option {
+.form-select,
+.form-select option {
   text-transform: capitalize;
   background-color: black;
 }
@@ -8,8 +9,6 @@
 .addNewPost {
   display: flex;
   flex-direction: row;
-
-
 
   &__leftSide {
     &__imageBox {
@@ -62,7 +61,7 @@
         &::placeholder {
           font-size: 19px;
           font-weight: 400;
-          color: #8899A6
+          color: #8899a6;
         }
       }
     }
@@ -70,6 +69,7 @@
     // line2
     &__postImageBox {
       position: relative;
+      margin-bottom: 20px;
 
       &__imageWrapper {
         border-radius: 15px;

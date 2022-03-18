@@ -178,7 +178,7 @@ const AddComment = ({
         borderBottom: `1px solid ${theme.border}`,
       }}
     >
-      <div className="addCommentBox__userImageBox">
+      {/* <div className="addCommentBox__userImageBox">
         <div>
           <img
             className="addCommentBox__userImageBox__image"
@@ -190,7 +190,7 @@ const AddComment = ({
             alt="Profile"
           ></img>
         </div>
-      </div>
+      </div> */}
       <div className="addCommentBox__inputBox">
         <textarea
           rows={textarea.rows}

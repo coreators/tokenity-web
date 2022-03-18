@@ -1,37 +1,38 @@
-import React, { useState, useContext, useEffect, Fragment } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useContext, useEffect, Fragment } from "react";
+import { Link, useParams } from "react-router-dom";
 
 // style
-import './UserProfile.scss';
+import "./UserProfile.scss";
 
 // assets
-import Empty from '../../assets/Images/empty.svg';
-import DefaultAvatar from '../../assets/Images/default_pp.png';
-import DefaultCover from '../../assets/Images/default_cp.png';
+import Empty from "../../assets/Images/empty.svg";
+import DefaultAvatar from "../../assets/Images/default_pp.png";
+import DefaultCover from "../../assets/Images/default_cp.png";
 
 // libraries
-import moment from 'moment';
-import Linkify from 'linkify-react';
+// import moment from "moment";
+import Linkify from "linkify-react";
 
 // api service
-import UserService from '../../services/UserService';
+import UserService from "../../services/UserService";
 
 // component
-import ImageModal from '../../components/ImageModal/ImageModal';
-import PostCard from '../../components/PostCard/PostCard';
-import EditProfileImageButton from '../../components/Buttons/EditProfileImageButton/EditProfileImageButton';
-import EditCoverImageButton from '../../components/Buttons/EditCoverImageButton/EditCoverImageButton';
-import EditProfile from '../../components/Buttons/EditProfile/EditProfile';
-import FriendsModal from '../../components/FriendsModal/FriendsModal';
-import AddFriendButton from '../../components/Buttons/AddFriendButton/AddFriendButton';
-import CheckVerifiedUserName from '../../components/CheckVerifiedUserName';
-import Spinner from '../../components/Spinner/Spinner';
+import ImageModal from "../../components/ImageModal/ImageModal";
+// import PostCard from "../../components/PostCard/PostCard";
+import EditProfileImageButton from "../../components/Buttons/EditProfileImageButton/EditProfileImageButton";
+import EditCoverImageButton from "../../components/Buttons/EditCoverImageButton/EditCoverImageButton";
+import EditProfile from "../../components/Buttons/EditProfile/EditProfile";
+import FriendsModal from "../../components/FriendsModal/FriendsModal";
+import AddFriendButton from "../../components/Buttons/AddFriendButton/AddFriendButton";
+import CheckVerifiedUserName from "../../components/CheckVerifiedUserName";
+import Spinner from "../../components/Spinner/Spinner";
 
 // context (global state)
-import { ThemeContext } from '../../context/ThemeContext';
-import { LanguageContext } from '../../context/LanguageContext';
-import UserContext from '../../context/UserContext';
-import UserProfileContext from '../../context/UserProfileContext';
+import { ThemeContext } from "../../context/ThemeContext";
+import { LanguageContext } from "../../context/LanguageContext";
+import UserContext from "../../context/UserContext";
+import UserProfileContext from "../../context/UserProfileContext";
+import PostBox from "../../components/PostBox/PostBox";
 
 const UserProfile = (props) => {
   const { userName } = useParams();
@@ -59,7 +60,7 @@ const UserProfile = (props) => {
   document.title = language.userProfile.pageTitle;
 
   // history init
-  const history = useNavigate();
+  // const history = useNavigate();
 
   useEffect(() => {
     let mounted = true;
@@ -96,9 +97,9 @@ const UserProfile = (props) => {
     };
   }, [setUserProfileData, userName]);
 
-  const goToBack = () => {
-    history(-1);
-  };
+  // const goToBack = () => {
+  //   history(-1);
+  // };
 
   const location = userProfileData.user.location ? (
     <div
@@ -110,7 +111,7 @@ const UserProfile = (props) => {
       {userProfileData.user.location}
     </div>
   ) : (
-    ''
+    ""
   );
 
   const website = userProfileData.user.website ? (
@@ -126,10 +127,10 @@ const UserProfile = (props) => {
         target="_blank"
       >
         {userProfileData.user.website}
-      </a>{' '}
+      </a>{" "}
     </div>
   ) : (
-    ''
+    ""
   );
 
   // direct to post details page on click on post
@@ -143,7 +144,12 @@ const UserProfile = (props) => {
         {userProfileData.posts.map((post) => {
           return (
             <div key={post.postId}>
-              <PostCard post={post} />
+              <Link
+                to={"/posts/" + post.postId}
+                className="text-decoration-none"
+              >
+                {<PostBox post={post} />}
+              </Link>
             </div>
           );
         })}
@@ -165,20 +171,20 @@ const UserProfile = (props) => {
     userName === userData.user.credentials.userName ? (
       <EditProfileImageButton />
     ) : (
-      ''
+      ""
     )
   ) : (
-    ''
+    ""
   );
 
   const editCover = userData.isAuth ? (
     userName === userData.user.credentials.userName ? (
       <EditCoverImageButton />
     ) : (
-      ''
+      ""
     )
   ) : (
-    ''
+    ""
   );
 
   return (
@@ -186,34 +192,6 @@ const UserProfile = (props) => {
       className="userProfile__main home-box"
       style={{ background: `${theme.background}` }}
     >
-      <div className="userProfile__main__title">
-        <div
-          className="userProfile__main__title__iconBox"
-          onClick={() => goToBack()}
-        >
-          <i
-            className="far fa-arrow-left"
-            style={{ color: theme.mainColor }}
-          ></i>
-          <div className="userProfile__main__title__iconBox__background"></div>
-        </div>
-        <div className="userProfile__main__title__textBox">
-          <h2
-            style={{
-              color: `${theme.typoMain}`,
-            }}
-          >
-            <CheckVerifiedUserName userName={userName} />
-          </h2>
-          <p
-            style={{
-              color: `${theme.typoSecondary}`,
-            }}
-          >
-            {userProfileData.posts.length} tokenities
-          </p>
-        </div>
-      </div>
       {/* user details section */}
       {profileLoader ? (
         <Spinner />
@@ -281,11 +259,7 @@ const UserProfile = (props) => {
                 style={{
                   color: theme.typoSecondary,
                 }}
-              >
-                <i className="fal fa-calendar-alt"></i>
-                {language.userProfile.joined}{' '}
-                {moment(userProfileData.user.createdAt).format('MMMM YYYY')}
-              </div>
+              ></div>
             </div>
             <FriendsModal />
           </div>
