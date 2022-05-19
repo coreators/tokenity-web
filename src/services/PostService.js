@@ -60,6 +60,17 @@ const PostService = {
     }
   },
 
+  uploadPostVideo: async function (fromData, token) {
+    try {
+      const response = await axios.post("/uploadPostVideo", fromData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   deletePost: async function (postId, token) {
     try {
       const response = await axios.delete(`/post/${postId}/delete`, {

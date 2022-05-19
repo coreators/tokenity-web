@@ -1,20 +1,21 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment } from "react";
 
 // style file
-import './RightSide.scss';
+import "./RightSide.scss";
 
 // context (global state)
-import UserContext from '../../context/UserContext';
+import UserContext from "../../context/UserContext";
 
 // libraries
-// import WhoToAdd from '../WhoToAdd/WhoToAdd';
-import Join from '../Join/Join';
-import TrendWidget from '../../components/TrendWidget/TrendWidget';
-// import CurrentUser from "../CurrentUser/CurrentUser";
-// import UserProfileCard from '../CurrentUser/UserProfileCard';
+import Join from "../Join/Join";
+import TrendWidget from "../../components/TrendWidget/TrendWidget";
+import UserProfileCard from "../CurrentUser/UserProfileCard";
+
+import { useLocation } from "react-router-dom";
 
 const RightSide = () => {
   // ******* start global state ******* //
+  const location = useLocation();
 
   // user context
   const { userData } = useContext(UserContext);
@@ -22,23 +23,17 @@ const RightSide = () => {
   // ******* end global state ******* //
   useEffect(() => {}, [userData.isAuth]);
 
+  let paths = location.pathname.split("/");
+
+  let path1 = paths[1];
+
   return (
     <div className="rightSide">
       <div className="rightSide__box">
         {userData.isAuth && window.screen.width > 991 ? (
           <Fragment>
-            <TrendWidget />
-            {/* <UserProfileCard /> */}
-
-            {/* <CurrentUser /> */}
-            {/* <div
-              className="rightSide__box__whoToAddBox"
-              style={{
-                backgroundColor: `${theme.foreground}`,
-              }}
-            >
-              <WhoToAdd />
-            </div> */}
+            {path1 !== "users" && <UserProfileCard />}
+            {path1 !== "trends" && <TrendWidget />}
           </Fragment>
         ) : (
           <Join />

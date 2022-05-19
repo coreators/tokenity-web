@@ -12,7 +12,7 @@ function TrendWidget() {
         <h3>Trends</h3>
         <Link to="/trends">See all</Link>
       </div>
-      <div className="trend-list">
+      <div className={styles.trendLists}>
         {trendings.map((trend) => {
           return <TrendItem key={trend.id} trend={trend} />;
         })}

@@ -1,18 +1,19 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // style file
-import './Navbar.scss';
-import TokenityLogo from '../../assets/ci/Tokenity_Logo_white.svg';
+import "./Navbar.scss";
+import TokenityLogo from "../../assets/ci/Tokenity_Logo_white.svg";
 
 // context (global state)
-import { ThemeContext } from '../../context/ThemeContext';
-import { LanguageContext } from '../../context/LanguageContext';
-import UserContext from '../../context/UserContext';
+import { ThemeContext } from "../../context/ThemeContext";
+import { LanguageContext } from "../../context/LanguageContext";
+import UserContext from "../../context/UserContext";
 
 // components
-import TokenityBtnNavbar from '../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar';
-import UserProfileCard from '../CurrentUser/UserProfileCard';
+import TokenityBtnNavbar from "../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar";
+// import UserProfileCard from "../CurrentUser/UserProfileCard";
+import UserImage from "../CurrentUser/UserImage";
 
 const Navbar = () => {
   // ******* start global state ******* //
@@ -41,7 +42,7 @@ const Navbar = () => {
 
   // local state
   const [isActive, setActive] = useState({ ...defaultActive });
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState("home");
 
   const [notsCount, setNotsCount] = useState(0);
 
@@ -82,9 +83,6 @@ const Navbar = () => {
                 <img alt="Tokenity" src={TokenityLogo} />
               </div>
             </div>
-            <div className="pc_only">
-              <UserProfileCard />
-            </div>
 
             {/* -------------- Start Tabs -------------- */}
             <div className="Navbar__box__tabs">
@@ -93,13 +91,13 @@ const Navbar = () => {
                 <Link
                   to="/"
                   onClick={() => {
-                    setPage('home');
+                    setPage("home");
                   }}
                 >
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
-                        isActive.home ? 'fas fa-home-alt' : 'fal fa-home-alt'
+                        isActive.home ? "fas fa-home-alt" : "fal fa-home-alt"
                       }
                       style={{
                         color: `${
@@ -126,15 +124,15 @@ const Navbar = () => {
                 <Link
                   to="/trends/"
                   onClick={() => {
-                    setPage('trend');
+                    setPage("trend");
                   }}
                 >
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
                         isActive.trend
-                          ? 'fas fa-chart-line'
-                          : 'fal fa-chart-line'
+                          ? "fas fa-chart-line"
+                          : "fal fa-chart-line"
                       }
                       style={{
                         color: `${
@@ -158,11 +156,11 @@ const Navbar = () => {
 
               {/* Wallet Tab */}
               <div className="Navbar__box__tab">
-                <Link to={'/wallet/'} onClick={() => setPage('wallet')}>
+                <Link to={"/wallet/"} onClick={() => setPage("wallet")}>
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
-                        isActive.wallet ? 'fas fa-wallet' : 'fal fa-wallet'
+                        isActive.wallet ? "fas fa-wallet" : "fal fa-wallet"
                       }
                       style={{
                         color: `${
@@ -188,15 +186,15 @@ const Navbar = () => {
                 <Link
                   to="/notifications"
                   onClick={() => {
-                    setPage('notifications');
+                    setPage("notifications");
                   }}
                 >
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
                         isActive.notifications
-                          ? 'fas fa-bell Navbar__box__tab__icon--not'
-                          : 'fal fa-bell Navbar__box__tab__icon--not'
+                          ? "fas fa-bell Navbar__box__tab__icon--not"
+                          : "fal fa-bell Navbar__box__tab__icon--not"
                       }
                       style={{
                         color: `${
@@ -211,7 +209,7 @@ const Navbar = () => {
                         style={{
                           backgroundColor: theme.mainColor,
                           border: `2px solid ${theme.background}`,
-                          color: '#fff',
+                          color: "#fff",
                         }}
                       >
                         {notsCount}
@@ -232,6 +230,15 @@ const Navbar = () => {
                   </span>
                 </Link>
               </div>
+              <div className="navbar_profile">
+                <Link
+                  to={"/users/" + userData.user.credentials.userName}
+                  onClick={() => setPage("profile")}
+                >
+                  <UserImage />
+                </Link>
+              </div>
+            
               {/* More Tab */}
               {/* <div className="Navbar__box__tab">
                 <Link to={'/settings/'} onClick={() => setPage('settings')}>
@@ -269,7 +276,7 @@ const Navbar = () => {
             {/* -------------- End Tabs -------------- */}
           </div>
         ) : (
-          ''
+          ""
         )}
       </div>
     </div>

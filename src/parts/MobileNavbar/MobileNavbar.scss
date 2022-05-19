@@ -8,7 +8,7 @@
       bottom: 15px;
       left: 10px;
       right: 10px;
-      box-shadow: inset 1px 1px 1px #ffffff29, 0px -8px 16px #00000014;
+      box-shadow: inset 1px 1px 1px #ffffff29, 3px 3px 16px #ffffff14;
       border-radius: 16px;
       opacity: 1;
       backdrop-filter: blur(15px);
@@ -38,7 +38,8 @@
         border-radius: 50%;
         width: 50px;
         height: 50px;
-        box-shadow: rgba(136, 153, 166, 0.2) 0px 0px 10px, rgba(136, 153, 166, 0.25) 0px 1px 3px 1px;
+        box-shadow: rgba(136, 153, 166, 0.2) 0px 0px 10px,
+          rgba(136, 153, 166, 0.25) 0px 1px 3px 1px;
         i {
           font-size: 20px;
         }
@@ -69,21 +70,6 @@
             height: 17px;
             box-sizing: content-box;
             text-align: center;
-          }
-        }
-
-        .userImage {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          margin-right: 10px;
-          position: relative;
-          img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            box-sizing: border-box;
-            object-fit: cover;
           }
         }
 

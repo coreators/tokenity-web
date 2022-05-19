@@ -15,12 +15,22 @@ import UserContext from "../../../context/UserContext";
 import PostsContext from "../../../context/PostsContext";
 import UserProfileContext from "../../../context/UserProfileContext";
 
+import { nftTypes } from "../../../util/constants";
+
+
+// api https://github.com/ffmpegwasm/ffmpeg.wasm/blob/master/docs/api.md
+
 const FormSubmitButton = ({
   textarea,
   setTextarea,
   imageStatus,
   setImageStatus,
+  videoStatus,
+  setVideoStatus,
   setOpen,
+  extra,
+  setExtra,
+  type,
 }) => {
   // ******* start global state *******//
   // theme context
@@ -43,31 +53,69 @@ const FormSubmitButton = ({
   // ******* end global state *******//
 
   // local state
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState({
+    switch: false,
+    state: "",
+  });
 
   var ButtonDisabledFlag =
-    textarea.value.trim().length > 0 || imageStatus.select ? false : true;
+    textarea.value.trim().length > 0 || imageStatus.image.length > 0 ? false : true;
 
   // add new post
   const sharePost = async () => {
-    setLoading(true);
+
+    // check if no image and video
+    if (!(imageStatus.image.length > 0) && !videoStatus.select) {
+      alert('Select image or video');
+      return;
+    }
+
     let postTextContent = textarea.value.trim();
     let post = {
       postContent: postTextContent.length > 0 ? postTextContent : "",
       postImage: null,
+      postImages: [],
+      postVideo: null,
+      postExtra: extra,
+      type: type,
+      isNft: false,
     };
 
-    // check if the post contain image also
-    if (imageStatus.select) {
+    // nft type check
+    if (nftTypes.includes(type)) post.isNft = true;
+    
+    if (imageStatus.image.length > 0) {
       // the post has image
+      setLoading({
+        switch: true,
+        state: "Uploading Images",
+      });
+
+      await Promise.all(imageStatus.image.map(async (image, index) => {
+        const formData = new FormData();
+        formData.append("image", image, image.name);
+        let res = await PostService.uploadPostImage(formData, userData.token);
+        let url = res.data.postImage;
+        if (index === 0) post.postImage = url;
+        post.postImages.push(url);
+      }));
+    }
+
+    if (videoStatus.select) {
+      setLoading({
+        switch: true,
+        state: "Uploading Video",
+      });
+
+      // the post has video
       const formData = new FormData();
-      formData.append("image", imageStatus.image, imageStatus.image.name);
+      formData.append("video", videoStatus.video, videoStatus.video.name);
       // upload image to server and get url
 
-      await PostService.uploadPostImage(formData, userData.token)
+      await PostService.uploadPostVideo(formData, userData.token)
         .then((res) => {
-          let url = res.data.postImage;
-          post.postImage = url;
+          let url = res.data.postVideo;
+          post.postVideo = url;
         })
         .catch((err) => {
           console.log(err);
@@ -128,11 +176,18 @@ const FormSubmitButton = ({
           maxRows: 100,
         });
         setImageStatus({
-          select: false,
-          imagePath: null,
-          image: "",
+          image: [],
         });
-        setLoading(false);
+        setVideoStatus({
+          select: false,
+          videoPath: null,
+          video: "",
+        });
+        setLoading({
+          switch: false,
+          state: "",
+        });
+        setExtra({});
         // close the modal
         if (setOpen) {
           setOpen(false);
@@ -140,7 +195,10 @@ const FormSubmitButton = ({
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false);
+        setLoading({
+          switch: false,
+          state: ""
+        });
         // close the modal
         if (setOpen) {
           setOpen(false);
@@ -155,12 +213,12 @@ const FormSubmitButton = ({
         color: "#fff",
         backgroundColor: theme.mainColor,
         borderRadius: variables.radius,
-        opacity: ButtonDisabledFlag || isLoading ? 0.6 : 1,
+        opacity: ButtonDisabledFlag || isLoading.switch ? 0.6 : 1,
       }}
       onClick={sharePost}
-      disabled={ButtonDisabledFlag || isLoading}
+      disabled={ButtonDisabledFlag || isLoading.switch}
     >
-      {isLoading
+      {isLoading.switch
         ? language.home.addPostButtonLoading
         : language.home.addPostButton}
     </button>

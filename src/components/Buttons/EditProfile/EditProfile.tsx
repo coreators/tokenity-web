@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 
 // style
-import './EditProfile.scss';
+import "./EditProfile.scss";
 // Global vars import
-import variables from '../../../style/CssVariables.scss';
+import variables from "../../../style/CssVariables.scss";
 
 // api service
-import UserService from '../../../services/UserService';
+import UserService from "../../../services/UserService";
 
 // bootstrap components
-import { Modal } from 'react-bootstrap';
+import { Modal } from "react-bootstrap";
 
 // context (global state)
-import UserContext from '../../../context/UserContext';
-import { ThemeContext } from '../../../context/ThemeContext';
-import { LanguageContext } from '../../../context/LanguageContext';
-import UserProfileContext from '../../../context/UserProfileContext';
+import UserContext from "../../../context/UserContext";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { LanguageContext } from "../../../context/LanguageContext";
+import UserProfileContext from "../../../context/UserProfileContext";
 
 const EditProfile = () => {
   // ******* start global state *******//
@@ -37,20 +37,20 @@ const EditProfile = () => {
 
   // local state
   const [isOpen, setOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [bio, setBio] = useState('');
-  const [location, setLocation] = useState('');
-  const [website, setWebsite] = useState('');
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [location, setLocation] = useState("");
+  const [website, setWebsite] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    setName(userProfileData.user.name ? userProfileData.user.name : '');
-    setBio(userProfileData.user.bio ? userProfileData.user.bio : '');
+    setName(userProfileData.user.name ? userProfileData.user.name : "");
+    setBio(userProfileData.user.bio ? userProfileData.user.bio : "");
     setLocation(
-      userProfileData.user.location ? userProfileData.user.location : ''
+      userProfileData.user.location ? userProfileData.user.location : ""
     );
     setWebsite(
-      userProfileData.user.website ? userProfileData.user.website : ''
+      userProfileData.user.website ? userProfileData.user.website : ""
     );
   }, [userProfileData]);
 
@@ -116,15 +116,7 @@ const EditProfile = () => {
 
   return (
     <div className="editProfile__main">
-      <button
-        style={{
-          border: `1px solid ${theme.mainColor}`,
-          color: theme.mainColor,
-          borderRadius: variables.radius,
-        }}
-        onClick={openModal}
-        className="editProfile__main__button"
-      >
+      <button onClick={openModal} className="editProfile__main__button">
         {language.userProfile.editProfileButton}
       </button>
 
@@ -133,7 +125,6 @@ const EditProfile = () => {
         onHide={closeModal}
         backdrop="static"
         keyboard={false}
-        centered="true"
         className="editProfile__main__modal"
       >
         <Modal.Header
@@ -166,7 +157,7 @@ const EditProfile = () => {
           <button
             className="editProfile__main__modal__header__saveButton"
             style={{
-              color: '#fff',
+              color: "#fff",
               backgroundColor: theme.mainColor,
               borderRadius: variables.radius,
               opacity: isLoading ? 0.6 : 1,

@@ -149,7 +149,7 @@ const Signup = () => {
               />
               {errors.userName && (
                 <small
-                  className="form-text"
+                  className="form-text d-block text-center mb-3"
                   style={{
                     color: theme.error,
                   }}

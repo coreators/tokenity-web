@@ -14,6 +14,9 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import UserContext from "../../../context/UserContext";
 import { LanguageContext } from "../../../context/LanguageContext";
 import UserProfileContext from "../../../context/UserProfileContext";
+import IconFollow from "../../Icons/IconFollow";
+
+import styles from "./AddFriendButton.module.scss";
 
 /**
  * @param {string} param0 userName is the user's name, who will be added as friend
@@ -58,7 +61,7 @@ const AddFriendButton = ({ userName }) => {
       }
     }
     return () => {
-      mounted = false
+      mounted = false;
     };
   }, [userData.isAuth, userName, friendsDependency, userData.user.friends]);
 
@@ -345,16 +348,8 @@ const AddFriendButton = ({ userName }) => {
       {language.userProfile.deleteFriendButton}
     </button>
   ) : (
-    <button
-      style={{
-        border: `1px solid ${theme.mainColor}`,
-        color: theme.mainColor,
-        borderRadius: variables.radius,
-      }}
-      onClick={addFriend}
-      className="addFriend__button"
-    >
-      {language.userProfile.addFriendButton}
+    <button onClick={addFriend} className={styles.add}>
+      <IconFollow />
     </button>
   );
 };

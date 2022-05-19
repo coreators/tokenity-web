@@ -6,16 +6,18 @@ import { useNavigate } from "react-router-dom";
 import PostService from "../../services/PostService";
 
 // context (global state)
-import { ThemeContext } from "../../context/ThemeContext";
+// import { ThemeContext } from "../../context/ThemeContext";
 import UserContext from "../../context/UserContext";
 import PostsContext from "../../context/PostsContext";
 import UserProfileContext from "../../context/UserProfileContext";
+import IconHeart from "../Icons/IconHeart";
+import IconHeartFilled from "../Icons/IconHeartFilled";
 
 const LikeButton = ({ post, postData, likes, setLikes, setPostData }) => {
   // ******* start global state ******* //
   // theme context
-  const { isLightTheme, light, dark } = useContext(ThemeContext);
-  const theme = isLightTheme ? light : dark;
+  // const { isLightTheme, light, dark } = useContext(ThemeContext);
+  // const theme = isLightTheme ? light : dark;
 
   // user context
   const { userData, setUserData } = useContext(UserContext);
@@ -301,7 +303,7 @@ const LikeButton = ({ post, postData, likes, setLikes, setPostData }) => {
   };
 
   return (
-    <div className="postCard__content__line4__like">
+    <div className="postCard__content__line4__like me-2">
       {wasLiked ? (
         <div
           className="like__box unlike"
@@ -310,18 +312,7 @@ const LikeButton = ({ post, postData, likes, setLikes, setPostData }) => {
             unlikePost(userData.isAuth);
           }}
         >
-          <i
-            className="fas fa-heart"
-            style={{
-              color: theme.error,
-            }}
-          ></i>
-          <div
-            className="like__background"
-            style={{
-              background: theme.errorBackground,
-            }}
-          ></div>
+          <IconHeart />
         </div>
       ) : (
         <div
@@ -331,26 +322,16 @@ const LikeButton = ({ post, postData, likes, setLikes, setPostData }) => {
             likePost(userData.isAuth);
           }}
         >
-          <i
-            className="fal fa-heart"
-            style={{
-              color: theme.mobileNavIcon,
-            }}
-          ></i>
-          <div
-            className="like__background"
-            style={{
-              background: theme.errorBackground,
-            }}
-          ></div>
+          
+          <IconHeartFilled />
         </div>
       )}
-      <div
+      {/* <div
         className="likesCount"
         style={{ color: wasLiked ? theme.error : theme.mobileNavIcon }}
       >
-        {likes_count === 0 ? "" : likes_count}
-      </div>
+        {likes_count === 0 ? "" : likes_count} 
+      </div> */}
     </div>
   );
 };

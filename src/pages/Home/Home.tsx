@@ -24,6 +24,13 @@ import Stories from "../../components/Story/Stories";
 
 import TokenityLogo from "../../assets/ci/Tokenity_Logo_white.svg";
 
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import { styled } from "@mui/material";
+// import TabPanel from '@mui/lab/TabPanel';
+
 const Home = () => {
   // ******* start global state ******* //
 
@@ -50,11 +57,23 @@ const Home = () => {
   // const [pinnedPost, setPinnedPost] = useState({});
   // const [PinnedPostLoad, setPinnedPostLoad] = useState(false);
 
+  const [value, setValue] = useState("global");
+
   // history init
   // const history = useNavigate();
 
   // set page title
   document.title = language.home.pageTitle;
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+
+    // add query on value
+  };
+
+  const TTab = styled(Tab)({
+    textTransform: "none",
+  });
 
   // fetch posts
   useEffect(() => {
@@ -201,7 +220,30 @@ const Home = () => {
         )} */}
 
         <Stories />
-
+        <TabContext value={value}>
+          <Box
+            sx={{ borderBottom: 1, marginBottom: 2, borderColor: "divider" }}
+          >
+            <TabList
+              onChange={handleChange}
+              aria-label="tabs"
+              TabIndicatorProps={{
+                style: {
+                  background: "#38baff",
+                  // top: "0",
+                  // color: "#fff",
+                  border: "none",
+                },
+              }}
+              variant="fullWidth"
+              textColor="inherit"
+            >
+              <TTab label="Global" value="global" />
+              <TTab label="NFTs" value="nfts" />
+              <TTab label="Following" value="following" />
+            </TabList>
+          </Box>
+        </TabContext>
         {/* 'pinned post' section */}
         {/* <PinnedPost pinnedPost={pinnedPost} PinnedPostLoad={PinnedPostLoad} /> */}
 

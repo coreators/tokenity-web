@@ -1,4 +1,6 @@
-export default function AddNewPostInput({ v }) {
+// import { type } from "os";
+
+export default function AddNewPostInput({ v, onChange }) {
   return (
     <div className="mt-3 row">
       <label className="col-sm-4 col-form-label">{v.title}</label>
@@ -6,9 +8,10 @@ export default function AddNewPostInput({ v }) {
         {v.type === "switch" && (
           <div className="form-check form-switch">
             <input
+              id={`${v.key}`}
               className="form-check-input"
               type="checkbox"
-              id={`${v.key}`}
+              onChange={onChange}
               defaultChecked
             />
             {v.switchLabel && (
@@ -23,25 +26,49 @@ export default function AddNewPostInput({ v }) {
           <div className="input-group ">
             <span className="input-group-text">COSM</span>
             <input
-              type="number"
-              min="0"
+              id={`${v.key}`}
+              type="tel"
               className="form-control"
-              onKeyPress={(e) =>
-                v.type === "min_bid" &&
-                !/[0-9.]/.test(e.key) &&
-                e.preventDefault()
-              }
+              onChange={onChange}
+              onKeyPress={(e) => {
+                return !/[0-9.]/.test(e.key) && e.preventDefault();
+              }}
+              onKeyUp={(e: any) => {
+                if (
+                  v.options &&
+                  v.options.max &&
+                  Number(e.target.value > v.options.max)
+                ) {
+                  e.target.value = v.options.max;
+                  return;
+                }
+              }}
+              {...v.options}
             />
           </div>
         )}
 
         {v.type !== "switch" && v.type !== "min_bid" && (
           <input
+            id={`${v.key}`}
             type={v.type}
             className="form-control"
             onKeyPress={(e) =>
               v.type === "number" && !/[0-9]/.test(e.key) && e.preventDefault()
             }
+            onKeyUp={(e: any) => {
+              if (v.type === "number") e.target.value = Number(e.target.value);
+              if (
+                v.options &&
+                v.options.max &&
+                Number(e.target.value > v.options.max)
+              ) {
+                e.target.value = v.options.max;
+                return;
+              }
+            }}
+            onChange={onChange}
+            {...v.options}
           />
         )}
       </div>

@@ -5,7 +5,7 @@ import React, { useState, useContext } from "react";
 import "./AddComment.scss";
 
 // assets
-import Default from "../../assets/Images/default_pp.png";
+// import Default from "../../assets/Images/default_pp.png";
 
 // api service
 import PostService from "../../services/PostService";
@@ -174,9 +174,9 @@ const AddComment = ({
   return (
     <div
       className="addCommentBox"
-      style={{
-        borderBottom: `1px solid ${theme.border}`,
-      }}
+      // style={{
+      //   borderBottom: `1px solid ${theme.border}`,
+      // }}
     >
       {/* <div className="addCommentBox__userImageBox">
         <div>

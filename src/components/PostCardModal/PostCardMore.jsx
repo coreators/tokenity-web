@@ -39,7 +39,6 @@ export default NiceModal.create(({ post }) => {
                     <button
                       className={styles.btn}
                       onClick={() => {
-                        modal.hide();
                         modal.resolve({
                           type: "delete",
                         });

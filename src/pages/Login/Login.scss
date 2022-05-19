@@ -38,7 +38,10 @@
   .signUp {
     text-align: center;
     font-size: 15px;
-
+    .signUp__link {
+      font-weight: bold;
+      color: rgb(90, 33, 255);
+    }
     .signUp__link:hover {
       text-decoration: underline;
     }

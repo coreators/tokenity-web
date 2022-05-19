@@ -59,7 +59,8 @@
 
   // user data
   &__userDetails {
-    margin-top: 90px;
+    overflow: hidden;
+    margin-top: 80px;
     margin-bottom: 80px;
 
     // cover image
@@ -82,22 +83,28 @@
     // rest user data
     &__userData {
       position: relative;
+      z-index: 2;
+      display: flex;
+
+      align-items: flex-end;
       padding: 10px;
-      text-align: center;
 
       // user profile image line
       &__pp {
-        position: absolute;
-        top: -72px;
-        left: 50%;
-        margin-left: -72px;
+        position: relative;
 
         &__userImageBox {
-          width: 134px;
-          height: 134px;
+          width: 80px;
+          height: 80px;
+
           overflow: hidden;
           border-radius: 50%;
           box-sizing: content-box;
+          svg {
+            position: absolute;
+            left: -5px;
+            top: -5px;
+          }
 
           > div:first-child {
             height: 100%;
@@ -121,14 +128,14 @@
 
       // main button
       &__buttonBox {
+        margin-left: auto;
+        margin-right: 10px;
         display: flex;
         justify-content: flex-end;
-        height: 50px;
       }
 
       // userName
       &__userName {
-        text-align: center;
         margin-top: 30px;
         margin-bottom: 10px;
         h2 {
@@ -144,10 +151,11 @@
       // bio
       &__bio {
         margin-bottom: 10px;
-        text-align: center;
+
         p {
           font-size: 15px;
           margin: 0;
+          word-break: break-all;
         }
       }
 
@@ -188,9 +196,12 @@
     &__posts {
       /* start no posts box*/
 
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 5px;
+      &.grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5px;
+      }
+
       .posts__empty {
         text-align: center;
         padding: 30px 10px 0;
@@ -235,12 +246,17 @@
   .userProfile__main {
     width: 75%;
     margin-left: 15%;
+
     &__title {
       width: 75%;
     }
+
+    &__userDetails {
+      margin-top: 40px;
+    }
     &__userDetails__userData__pp__userImageBox {
-      width: 110px;
-      height: 110px;
+      // width: 110px;
+      // height: 110px;
     }
     &__userDetails__userData__userName {
       margin-top: 8px;
@@ -253,6 +269,10 @@
   .userProfile__main {
     width: 50%;
     margin-left: 10%;
+
+    &__userDetails {
+      margin-top: 40px;
+    }
     &__title {
       width: 50%;
     }
