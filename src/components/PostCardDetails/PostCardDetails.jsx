@@ -92,9 +92,9 @@ const PostCardDetails = ({ postData, likes, setLikes, setPostData }) => {
         >
           <Linkify>{postData.postContent}</Linkify>
         </div>
-        {postData.postImage ? (
+        {postData ? (
           <ImageModal
-            imageUrl={postData.postImage}
+            post={postData}
             className="postDetails__post__content__line3__image"
           />
         ) : (

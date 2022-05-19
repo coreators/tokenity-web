@@ -1,0 +1,34 @@
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  
+  .rank {
+    font-size: 0.8em;
+    width: 30px;
+  }
+  
+  .profileImage img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+  
+  .values {
+    margin-left: auto;
+    text-align: right;
+    color: #767676;
+    span {
+      font-size: 0.8em;
+    }
+  }
+  
+  .green {
+    color: #34d158;
+  }
+  .red {
+    color: #ff3838;
+  }
+  

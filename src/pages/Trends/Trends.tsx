@@ -7,6 +7,11 @@ const Settings = () => {
       <div className="home-box__title mobile_only">
         <h1>Trends</h1>
       </div>
+
+
+      {/* top5 */}
+
+      {/* category */}
       <div className="home-box__content">
         <div className="trend-list">
           {trendings.map((trend) => {

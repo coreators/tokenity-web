@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render } from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
@@ -12,14 +12,16 @@ import * as serviceWorker from "./serviceWorker";
 
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
 const rootElement = document.getElementById("root");
-render(
+const root = createRoot(rootElement);
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
-  rootElement
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -46,6 +46,9 @@
       font-size: 15px;
       font-weight: 400;
       overflow-x: hidden;
+      border: 0;
+      background-color: black;
+      color: white;
 
       &:focus {
         outline: 0;

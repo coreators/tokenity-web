@@ -1,6 +1,7 @@
 .header {
   margin-top: 2em;
   text-align: center;
+  margin-bottom: 2em;
 
   h2 {
     small {
@@ -15,22 +16,27 @@
   }
   button {
     background-color: #2c2c2d;
-    padding: 5px 25px 5px 5px;
+    padding: 5px 30px 5px 10px;
     border-radius: 5px;
     color: #989899;
     font-size: 0.8em;
-
-    max-width: 130px;
-
+    max-width: 240px;
     box-sizing: border-box;
-
-    div {
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
   }
-
   button:after {
-    content: '';
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    width: 15px;
+    height: 15px;
+    background-image: url(../../assets/IconsSvg2/content_copy_blue_24dp.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 5px;
   }
 }

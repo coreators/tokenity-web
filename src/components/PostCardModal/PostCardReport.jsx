@@ -5,7 +5,6 @@ import NiceModal, { useModal, bootstrapDialog } from "@ebay/nice-modal-react";
 import { Modal, Button } from "react-bootstrap";
 
 // style
-
 // delete
 
 // report
@@ -14,7 +13,6 @@ export default NiceModal.create(() => {
   let modal = useModal();
 
   // can delete post
-
   // let resons = [""];
 
   return (

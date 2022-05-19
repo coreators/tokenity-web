@@ -132,7 +132,7 @@ const Login = () => {
         {errors.general && (
           <small
             id="general-error"
-            className="form-text"
+            className="form-text d-block text-center mb-3"
             style={{
               color: theme.error,
             }}
@@ -246,13 +246,7 @@ const Login = () => {
           >
             {language.login.question}
             {"  "}
-            <Link
-              to="/signup"
-              className="signUp__link"
-              style={{
-                color: theme.mainColor,
-              }}
-            >
+            <Link to="/signup" className="signUp__link">
               {language.login.link}
             </Link>
           </span>

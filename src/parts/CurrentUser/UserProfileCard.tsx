@@ -23,6 +23,7 @@ import CheckVerifiedUserName from "../../components/CheckVerifiedUserName";
 import { ThemeContext } from "../../context/ThemeContext";
 import { LanguageContext } from "../../context/LanguageContext";
 import UserContext from "../../context/UserContext";
+import UserProfileContext from "../../context/UserProfileContext";
 
 const UserProfileCard = () => {
   // const { userName } = useParams();
@@ -38,7 +39,7 @@ const UserProfileCard = () => {
 
   // user context
   const { userData } = useContext(UserContext);
-
+  const { userProfileData } = useContext(UserProfileContext);
   // user profile data context
 
   // ******* start local state *******//
@@ -49,12 +50,13 @@ const UserProfileCard = () => {
   return (
     <div className={styles.card}>
       <div className={styles.backImageOverlay}></div>
+
       <div
         className={styles.backImage}
         style={{
           backgroundImage: `url(${
-            userData.user.credentials.coverPicture
-              ? userData.user.credentials.coverPicture
+            userData.user.credentials.profilePicture
+              ? userData.user.credentials.profilePicture
               : DefaultCover
           })`,
         }}
@@ -108,7 +110,11 @@ const UserProfileCard = () => {
           />
         </h2>
         <p style={{ color: theme.typoMain }}>
-          <Linkify>{userData.user.credentials.bio}</Linkify>
+          <Linkify>
+            {userProfileData.user.bio
+              ? userProfileData.user.bio
+              : userData.user.credentials.bio}
+          </Linkify>
         </p>
       </div>
       <div className={styles.stats}>

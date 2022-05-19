@@ -17,7 +17,10 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { LanguageContext } from "../../context/LanguageContext";
 // import UserContext from "../../context/UserContext";
 
-import { types, extraInputs } from "./constants";
+import { types, extraInputs } from "../../util/constants";
+
+// import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+import VideoConverter from "../../util/convertvideo";
 
 const AddNewPost = ({ inputId, setOpen }) => {
   // ******* start global state ******* //
@@ -44,12 +47,22 @@ const AddNewPost = ({ inputId, setOpen }) => {
   });
 
   const [imageStatus, setImageStatus] = useState({
-    select: false,
-    imagePath: null,
-    image: "",
+    image: [],
   });
 
-  const [type, setType] = useState("porst");
+  const [videoStatus, setVideoStatus] = useState({
+    select: false,
+    videoPath: null,
+    video: null,
+  });
+
+  const [extra, setExtra] = useState({});
+
+  const [type, setType] = useState("post");
+
+  const handleExtraInput = (e) => {
+    setExtra({ ...extra, ...{ [e.target.id]: e.target.value } });
+  };
 
   const handleSelect = (e) => {
     setType(e.target.value);
@@ -82,12 +95,14 @@ const AddNewPost = ({ inputId, setOpen }) => {
   };
 
   const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    setImageStatus({
-      select: true,
-      imagePath: URL.createObjectURL(image),
-      image,
-    });
+    const images = [...event.target.files];
+
+    if (images.length > 0) {
+      console.log(images);
+      setImageStatus({
+        image: images,
+      });
+    }
   };
 
   const handleImageUpload = () => {
@@ -95,13 +110,67 @@ const AddNewPost = ({ inputId, setOpen }) => {
     fileInput.click();
   };
 
-  const handleVideoChange = (event) => {
-    const image = event.target.files[0];
-    setImageStatus({
-      select: true,
-      imagePath: URL.createObjectURL(image),
-      image,
-    });
+  const getVideoDuration = async (f) => {
+    const fileCallbackToPromise = (fileObj) => {
+      return Promise.race([
+        new Promise((resolve) => {
+          if (fileObj instanceof HTMLImageElement) fileObj.onload = resolve;
+          else fileObj.onloadedmetadata = resolve;
+        }),
+        new Promise((_, reject) => {
+          setTimeout(reject, 1000);
+        }),
+      ]);
+    };
+
+    const objectUrl = URL.createObjectURL(f);
+    // const isVideo = type.startsWith('video/');
+    const video = document.createElement("video");
+    console.log(video);
+    console.log(await video.canPlayType);
+    video.src = objectUrl;
+    await fileCallbackToPromise(video);
+    return {
+      duration: video.duration,
+      width: video.videoWidth,
+      height: video.videoHeight,
+    };
+  };
+
+
+  const handleVideoChange = async (event) => {
+    const videoFile = event.target.files[0];
+    // const { name } = videoFile;
+
+    const videoMeta = await getVideoDuration(videoFile);
+    console.log(videoFile);
+    console.log(videoMeta);
+    
+    if (videoFile.type !== "video/quicktime" && videoFile.type !== "video/mp4") {
+      alert(`Video Format(${videoFile.type}) is not supported, Use mp4 file.`);
+      return;
+    }
+    if (videoMeta.duration > 60) {
+      alert("Video is over 1min, only 1min video can upload");
+      return;
+    }
+
+    if (videoFile.type === "video/quicktime") {
+      let targetVideoFormat = 'mp4';
+      let convertedVideoDataObj = await VideoConverter.convert(videoFile, targetVideoFormat);
+  
+      setVideoStatus({
+        select: true,
+        videoPath: convertedVideoDataObj.data,
+        video: convertedVideoDataObj.blob,
+      });
+    } else {
+      setVideoStatus({
+        select: true,
+        videoPath: URL.createObjectURL(videoFile),
+        video: videoFile,
+      });
+    }
   };
 
   const handleVideoUpload = () => {
@@ -109,11 +178,19 @@ const AddNewPost = ({ inputId, setOpen }) => {
     fileInput.click();
   };
 
-  const imageDelete = () => {
+  const imageDelete = (index: number) => {
+    let images = Array.from(imageStatus.image);
+    images.splice(index, 1);
     setImageStatus({
+      image: images,
+    });
+  };
+
+  const videoDelete = () => {
+    setVideoStatus({
       select: false,
-      imagePath: null,
-      image: "",
+      videoPath: null,
+      video: null,
     });
   };
 
@@ -134,12 +211,16 @@ const AddNewPost = ({ inputId, setOpen }) => {
               onChange={(event) => handleChange(event)}
             />
           </div>
-          <div className="addNewPost__rightSide__postImageBox">
-            {imageStatus.select ? (
-              <Fragment>
+
+          {imageStatus.image.map((el, index) => {
+            return (
+              <div
+                key={`ix${index}`}
+                className="addNewPost__rightSide__postImageBox"
+              >
                 <div
                   className="addNewPost__rightSide__postImageBox__iconBox"
-                  onClick={imageDelete}
+                  onClick={() => imageDelete(index)}
                 >
                   <i
                     className="fal fa-times"
@@ -153,7 +234,34 @@ const AddNewPost = ({ inputId, setOpen }) => {
                   ></div>
                 </div>
                 <div className="addNewPost__rightSide__postImageBox__imageWrapper">
-                  <img alt="post" src={imageStatus.imagePath} />
+                  <img alt="post" src={URL.createObjectURL(el)} />
+                </div>
+              </div>
+            );
+          })}
+
+          <div className="addNewPost__rightSide__postImageBox">
+            {videoStatus.select ? (
+              <Fragment>
+                <div
+                  className="addNewPost__rightSide__postImageBox__iconBox"
+                  onClick={videoDelete}
+                >
+                  <i
+                    className="fal fa-times"
+                    style={{ color: "#fff", zIndex: "10" }}
+                  ></i>
+                  <div
+                    className="addNewPost__rightSide__postImageBox__iconBox__background"
+                    style={{
+                      background: theme.mainColor,
+                    }}
+                  ></div>
+                </div>
+                <div className="addNewPost__rightSide__postImageBox__imageWrapper">
+                  <video controls>
+                    <source src={videoStatus.videoPath} />
+                  </video>
                 </div>
               </Fragment>
             ) : (
@@ -184,8 +292,9 @@ const AddNewPost = ({ inputId, setOpen }) => {
             <div className="col-auto addNewPost__rightSide__buttonsBox__imageUpload p-2">
               <input
                 type="file"
+                multiple
                 id={inputId}
-                accept="image/x-png,image/jpeg"
+                accept="image/x-png,image/png,image/jpeg"
                 onChange={(event) => handleImageChange(event)}
               />
               <div className="button" onClick={() => handleImageUpload()}>
@@ -200,7 +309,7 @@ const AddNewPost = ({ inputId, setOpen }) => {
               <input
                 type="file"
                 id={inputId + "_video"}
-                accept="video/mp4,video/x-m4v,video/*"
+                accept=".mp4,.mov"
                 onChange={(event) => handleVideoChange(event)}
               />
               <div className="button" onClick={() => handleVideoUpload()}>
@@ -222,7 +331,12 @@ const AddNewPost = ({ inputId, setOpen }) => {
             setTextarea={setTextarea}
             imageStatus={imageStatus}
             setImageStatus={setImageStatus}
+            videoStatus={videoStatus}
+            setVideoStatus={setVideoStatus}
             setOpen={setOpen}
+            extra={extra}
+            setExtra={setExtra}
+            type={type}
           />
         </div>
       </div>
@@ -232,7 +346,13 @@ const AddNewPost = ({ inputId, setOpen }) => {
           return (
             <div key={`x${key}`}>
               {extraInputs[key].map((v, index) => {
-                return <AddNewPostInput key={`${key}x${index}`} v={v} />;
+                return (
+                  <AddNewPostInput
+                    key={`${key}x${index}`}
+                    v={v}
+                    onChange={(event) => handleExtraInput(event)}
+                  />
+                );
               })}
             </div>
           );

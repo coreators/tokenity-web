@@ -1,4 +1,4 @@
-@import '../../style/CssVariables';
+@import "../../style/CssVariables";
 
 .Navbar {
   position: relative;
@@ -6,10 +6,14 @@
   &__main {
     height: 100vh;
     width: 30%;
+    max-width: 400px;
+    overflow: auto;
     position: fixed;
   }
 }
-
+.Navbar .navbar_profile {
+  display: none;
+}
 .Navbar__box {
   padding: 20px 10% 20px 30%;
 
@@ -89,7 +93,9 @@
     }
   }
 }
-
+.Navbar__main::-webkit-scrollbar {
+  display: none;
+}
 .buttons__box {
   display: flex;
   justify-content: space-around;
@@ -115,16 +121,22 @@
   }
 }
 
-@media (min-width: 501px) and (max-width: 991px) {
+@media (min-width: 501px) and (max-width: 1280px) {
   /* For tablet: */
-  .Navbar__main {
-    width: 15%;
+
+  .Navbar .navbar_profile {
+    display: block;
   }
+
+  .Navbar__main {
+    width: 10%;
+  }
+
   .Navbar__box {
-    padding: 20px 30% 20px 30%;
+    padding: 20px 0 20px 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     &__logo {
       display: none;
     }
@@ -162,50 +174,5 @@
   }
 }
 
-@media (min-width: 992px) and (max-width: 1280px) {
-  /* For small lab: */
-  .Navbar__main {
-    width: 10%;
-  }
-
-  .Navbar__box {
-    padding: 20px 20% 20px 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    &__logo {
-      display: none;
-    }
-  }
-
-  .Navbar__box__tabs {
-    .Navbar__box__tab {
-      a {
-        padding: 12px 8px;
-
-        &:hover {
-          background: rgba(29, 161, 242, 0.1);
-          border-radius: 9999px;
-          padding: 12px 8px;
-        }
-      }
-      &__icon {
-        margin-right: 0;
-      }
-      &__text {
-        display: none;
-      }
-    }
-  }
-
-  .--formSubmitButton {
-    .bigButton {
-      display: none;
-    }
-  }
-  .--formSubmitButton {
-    .smallButton {
-      display: block !important;
-    }
-  }
+@media (min-width: 501px) and (max-width: 991px) {
 }

@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from "react";
 // import { ThemeContext } from '../../context/ThemeContext';
 import PostsContext from "../../context/PostsContext";
 
+import IconComment from "../Icons/IconComment";
 const CommentButton = ({ post, className }) => {
   // ******* start global state ******* //
 
@@ -23,10 +24,11 @@ const CommentButton = ({ post, className }) => {
   return (
     <div className={`postCard__content__line4__comment ${className}`}>
       <div className="comment__box">
-        <i className="fal fa-comment"></i>
-        <div className="comment__background"></div>
+        {/* <i className="fal fa-comment"></i> */}
+        <IconComment />
+        {/* <div className="comment__background"></div> */}
       </div>
-      {post.commentCount === 0 ? "" : post.commentCount}
+      {/* {post.commentCount === 0 ? "" : post.commentCount} */}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./PostCard.scss";
 
 // libraries
+import moment from "moment";
 import ImageModal from "../ImageModal/ImageModal";
 
 // import Linkify from "react-linkify";
@@ -28,6 +29,7 @@ import AddComment from "../AddComment/AddComment";
 
 // api service
 import PostService from "../../services/PostService";
+import PostType from "./PostType";
 
 const PostCard = ({ post }) => {
   // ******* start global state ******* //
@@ -53,23 +55,26 @@ const PostCard = ({ post }) => {
 
   var arabic = /[\u0600-\u06FF]/;
 
-  const deletePostConfirm = () => {
-    let confirm = window.confirm(language.postDetails.confirmDeletePost);
-    if (confirm) {
-      deletePost();
+  const deletePostConfirm = (post) => {
+    console.log("deletePost");
+    let isConfirm = window.confirm(language.postDetails.confirmDeletePost);
+    if (isConfirm) {
+      deletePost(post);
+    } else {
+      NiceModal.remove("postcard-more");
     }
   };
   const showModal = () => {
-    NiceModal.show("postcard-more", { post }).then((result) => {
+    NiceModal.show("postcard-more", { post }).then((result: any) => {
       if (result.type === "delete") {
         NiceModal.remove("postcard-more");
-        deletePostConfirm();
+        deletePostConfirm(post);
       }
     });
   };
 
   // delete post by id
-  const deletePost = () => {
+  const deletePost = (post) => {
     PostService.deletePost(post.postId, userData.token)
       .then(() => {
         let newPosts = posts.filter(
@@ -151,7 +156,7 @@ const PostCard = ({ post }) => {
               </div>
             </div>
             <div className="ms-2">
-              <span
+              <div
                 className="h6 mb-1"
                 style={{
                   color: theme.typoMain,
@@ -159,7 +164,15 @@ const PostCard = ({ post }) => {
                 }}
               >
                 <CheckVerifiedUserName userName={post.userName} />
-              </span>
+                <div
+                  style={{
+                    color: theme.typoSecondary,
+                  }}
+                  className="time"
+                >
+                  {moment(post.createdAt).fromNow()}
+                </div>
+              </div>
 
               {/* <span className="d-block text-sm text-muted"></span> */}
             </div>
@@ -176,38 +189,44 @@ const PostCard = ({ post }) => {
         )}
       </div>
       <div className="postCard__content">
-        {post.postImage ? (
-          <ImageModal
-            imageUrl={post.postImage}
-            className="postCard__content__line3__image"
-          />
+        {post ? (
+          <ImageModal post={post} className="postCard__content__line3__image" />
         ) : (
           ""
         )}
+
         <div
-          className="postCard__content__line2 p-3"
-          style={{
-            color: theme.typoMain,
-            textAlign: `${arabic.test(post.postContent) ? "right" : "left"}`,
-            direction: `${arabic.test(post.postContent) ? "rtl" : "ltr"}`,
-          }}
-        >
-          {post.postContent}
-        </div>
-        <div
-          className="postCard__content__line4 p-3"
+          className="postCard__content__line4 px-3"
           style={{
             color: theme.mobileNavIcon,
           }}
         >
+          <LikeButton
+            post={post}
+            postData={undefined}
+            likes={undefined}
+            setLikes={undefined}
+            setPostData={undefined}
+          />
           <Link to={"/posts/" + post.postId} className="text-decoration-none">
-            <CommentButton post={post} className="me-2" />
+            <CommentButton post={post} className="" />
           </Link>
-          <LikeButton post={post} />
         </div>
 
+        <PostType post={post} />
+
         {/* add comment input */}
-        {userData.isAuth ? <AddComment postId={post.postId} /> : ""}
+        {userData.isAuth ? (
+          <AddComment
+            postId={post.postId}
+            comments={undefined}
+            setComments={undefined}
+            postData={undefined}
+            setPostData={setPostsData}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

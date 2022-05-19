@@ -1,5 +1,7 @@
 const types = ["post", "story", "ticket", "art", "funding", "certification"];
 
+const nftTypes = ["ticket", "art", "funding", "certification"];
+
 const extraInputs = {
   ticket: [
     {
@@ -21,6 +23,10 @@ const extraInputs = {
       type: "min_bid",
       title: "Minimum Bid",
       key: "min_bid",
+      options: {
+        min: 0,
+        step: 0.00000001,
+      },
     },
     {
       type: "date",
@@ -61,6 +67,9 @@ const extraInputs = {
       type: "min_bid",
       title: "Minimum Bid",
       key: "min_bid",
+      options: {
+        min: 0,
+      },
     },
     {
       type: "number",
@@ -96,6 +105,9 @@ const extraInputs = {
       type: "min_bid",
       title: "Target Price",
       key: "target_price",
+      options: {
+        min: 0,
+      },
     },
     {
       type: "date",
@@ -136,6 +148,9 @@ const extraInputs = {
       type: "min_bid",
       title: "Minimum Bid",
       key: "min_bid",
+      options: {
+        min: 0,
+      },
     },
     {
       type: "number",
@@ -157,4 +172,4 @@ const extraInputs = {
     },
   ],
 };
-export { types, extraInputs };
+export { types, nftTypes, extraInputs };

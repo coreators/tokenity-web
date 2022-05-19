@@ -1,10 +1,15 @@
 import styles from './StoryCard.module.scss';
 
-function StoryCard({ story }) {
+
+
+function StoryCard({ story, onClick }) {
+
+
   return (
     <div
       className={styles.storyCard}
       style={{ backgroundImage: `url(${story.backImageUrl})` }}
+      onClick={onClick}
     >
       <div className={styles.profileImage}>
         <img src={story.profileImageUrl} alt="profile" />
