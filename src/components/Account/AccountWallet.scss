@@ -1,0 +1,26 @@
+.walletContainer {
+  display: flex;
+  width: 180px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  align-items: center;
+  margin-left: 15px;
+  margin-bottom: 30px;
+  z-index: 1;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}
+
+.walletText {
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+}
