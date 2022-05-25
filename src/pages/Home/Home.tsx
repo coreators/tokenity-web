@@ -29,6 +29,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import { styled } from "@mui/material";
+import { Link } from "react-router-dom";
 // import TabPanel from '@mui/lab/TabPanel';
 
 const Home = () => {
@@ -198,10 +199,20 @@ const Home = () => {
       <div
         className="home-box__title mobile_only"
         style={{
+          display: "flex",
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
           background: `${theme.background}`,
         }}
       >
         <img alt="Tokenity" src={TokenityLogo} width="130" />
+
+        <Link to="/about">
+          <i
+            className={"far fa-book"}
+          ></i>
+        </Link>
       </div>
 
       <div className="home-box__content">
