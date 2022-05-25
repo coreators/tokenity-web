@@ -13,8 +13,10 @@ function TrendWidget() {
         <Link to="/trends">See all</Link>
       </div>
       <div className={styles.trendLists}>
-        {trendings.map((trend) => {
-          return <TrendItem key={trend.id} trend={trend} />;
+        {trendings.map((trend, i) => {
+          if (i <= 9) {
+            return <TrendItem key={trend.rank} trend={trend} />;
+          }
         })}
       </div>
     </div>

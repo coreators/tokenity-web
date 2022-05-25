@@ -32,8 +32,9 @@ const RightSide = () => {
       <div className="rightSide__box">
         {userData.isAuth && window.screen.width > 991 ? (
           <Fragment>
-            {path1 !== "users" && <UserProfileCard />}
-            {path1 !== "trends" && <TrendWidget />}
+            {/* {path1 !== "users" && <UserProfileCard />} */}
+            <TrendWidget />
+            {/* {path1 !== "trends" && <TrendWidget />} */}
           </Fragment>
         ) : (
           <Join />

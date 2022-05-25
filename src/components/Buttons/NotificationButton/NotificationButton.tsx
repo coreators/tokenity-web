@@ -16,7 +16,7 @@ const NotificationButton = () => {
   const [notsCount, setNotsCount] = useState(0);
 
   useEffect(() => {
-    if (userData.isAuth) {
+    if (userData && userData.isAuth) {
       let userNotifications = userData.user.notifications;
 
       if (userNotifications && userNotifications.length > 0) {
@@ -30,7 +30,7 @@ const NotificationButton = () => {
       }
     }
 
-  }, [userData.isAuth, userData.user.notifications]);
+  }, [userData.isAuth]);
 
   const clearCounter = () => {
     setNotsCount(0);

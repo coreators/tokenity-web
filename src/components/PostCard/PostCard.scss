@@ -157,6 +157,7 @@
 
       &__like {
         display: flex;
+        cursor: pointer;
         &:hover > .like__box > .like__background {
           display: block;
         }

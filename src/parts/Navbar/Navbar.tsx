@@ -15,6 +15,7 @@ import TokenityBtnNavbar from "../../components/Buttons/TokenityBtnNavbar/Tokeni
 // import UserProfileCard from "../CurrentUser/UserProfileCard";
 import UserImage from "../CurrentUser/UserImage";
 import AccountWallet from "../../components/Account/AccountWallet";
+import UserProfileCard from "../CurrentUser/UserProfileCard";
 
 const Navbar = () => {
   // ******* start global state ******* //
@@ -88,9 +89,15 @@ const Navbar = () => {
 
             {/* -------------- Start Tabs -------------- */}
             <div className="Navbar__box__tabs">
-              {/* Twittern button Tab */}
-              <div className="Navbar__box__tab --formSubmitButton">
-                <TokenityBtnNavbar />
+              {/* Profile Tab */}
+              <UserProfileCard />
+              <div className="navbar_profile">
+                <Link
+                  to={"/users/" + userData.user.credentials.userName}
+                  onClick={() => setPage("profile")}
+                >
+                  <UserImage />
+                </Link>
               </div>
 
               {/* Home Tab */}
@@ -239,14 +246,6 @@ const Navbar = () => {
                   </span>
                 </Link>
               </div>
-              <div className="navbar_profile">
-                <Link
-                  to={"/users/" + userData.user.credentials.userName}
-                  onClick={() => setPage("profile")}
-                >
-                  <UserImage />
-                </Link>
-              </div>
 
               {/* About Tab */}
               <div className="Navbar__box__tab">
@@ -279,6 +278,11 @@ const Navbar = () => {
                     {language.navbar.about}
                   </span>
                 </Link>
+              </div>
+
+              {/* Twittern button Tab */}
+              <div className="Navbar__box__tab --formSubmitButton">
+                <TokenityBtnNavbar />
               </div>
 
             
