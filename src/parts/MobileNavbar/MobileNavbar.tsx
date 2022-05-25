@@ -30,11 +30,11 @@ const MobileNavbar = () => {
 
   const defaultActive = {
     home: false,
-    notifications: false,
     profile: false,
     settings: false,
     wallet: false,
     trends: false,
+    about: false,
   };
 
   // local state
@@ -43,30 +43,9 @@ const MobileNavbar = () => {
   });
   const [page, setPage] = useState('home');
 
-  // notification number
-  const [notsCount, setNotsCount] = useState(0);
-
   useEffect(() => {
-    if (userData.isAuth) {
-      let userNotifications = userData.user.notifications;
-
-      if (userNotifications && userNotifications.length > 0) {
-        userNotifications.filter((not) => not.read === false).length > 0
-          ? setNotsCount(
-              userNotifications.filter((not) => not.read === false).length
-            )
-          : setNotsCount(0);
-      } else {
-        setNotsCount(0);
-      }
-    }
-
     setActive({ ...defaultActive, [page]: true });
-  }, [page, userData.isAuth]);
-
-  const clearCounter = () => {
-    setNotsCount(0);
-  };
+  }, [page]);
 
   return (
     <div className="MobileNavber">
@@ -95,39 +74,6 @@ const MobileNavbar = () => {
                           }`,
                         }}
                       ></i>
-                    </span>
-                  </Link>
-                </div>
-                {/* Notification Tab */}
-                <div className="MobileNavber__box__tab" onClick={clearCounter}>
-                  <Link
-                    to="/notifications"
-                    onClick={() => setPage('notifications')}
-                  >
-                    <span className="MobileNavber__box__tab__icon">
-                      <i
-                        className={
-                          isActive.notifications ? 'fas fa-bell' : 'fal fa-bell'
-                        }
-                        style={{
-                          color: `${
-                            isActive.notifications
-                              ? theme.mainColor
-                              : theme.mobileNavIcon
-                          }`,
-                        }}
-                      ></i>
-                      {notsCount > 0 && (
-                        <span
-                          style={{
-                            backgroundColor: theme.mainColor,
-                            border: `2px solid ${theme.background}`,
-                            color: '#fff',
-                          }}
-                        >
-                          {notsCount}
-                        </span>
-                      )}
                     </span>
                   </Link>
                 </div>
@@ -173,6 +119,27 @@ const MobileNavbar = () => {
                     </span>
                   </Link>
                 </div>
+
+                {/* About Tab */}
+                <div className="MobileNavber__box__tab">
+                  <Link to={'/about/'} onClick={() => setPage('about')}>
+                    <span className="MobileNavber__box__tab__icon">
+                      <i
+                        className={
+                          isActive.about? 'fas fa-book' : 'far fa-book'
+                        }
+                        style={{
+                          color: `${
+                            isActive.about
+                              ? theme.mainColor
+                              : theme.mobileNavIcon
+                          }`,
+                        }}
+                      ></i>
+                    </span>
+                  </Link>
+                </div>
+
                 {/* More Tab */}
                 {/* <div className="MobileNavber__box__tab">
                   <Link to={"/settings"} onClick={() => setPage("settings")}>
@@ -193,26 +160,9 @@ const MobileNavbar = () => {
                     </span>
                   </Link>
                 </div> */}
+
                 {/* Profile Tab */}
                 <div className="MobileNavber__box__tab">
-                  {/* <Link
-                    to={"/users/" + userData.user.credentials.userName}
-                    onClick={() => setPage("profile")}
-                  >
-                    <span className="MobileNavber__box__tab__icon">
-                      <i
-                        className={
-                          isActive.profile ? "fas fa-user" : "fal fa-user"
-                        }
-                        style={{
-                          color: `${isActive.profile
-                              ? theme.mainColor
-                              : theme.mobileNavIcon
-                            }`,
-                        }}
-                      ></i>
-                    </span>
-                  </Link> */}
                   <Link
                     to={'/users/' + userData.user.credentials.userName}
                     onClick={() => setPage('profile')}

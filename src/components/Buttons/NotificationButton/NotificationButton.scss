@@ -1,0 +1,19 @@
+.box__tab {
+  &__icon {
+    font-size: 22px;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      font-size: 11px;
+      display: inline-block;
+      border-radius: 50%;
+      width: 17px;
+      height: 17px;
+      box-sizing: content-box;
+      text-align: center;
+    }
+  }
+}
