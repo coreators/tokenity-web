@@ -1,13 +1,13 @@
 import * as React from 'react';
 
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
 // modals
 import NiceModal from '@ebay/nice-modal-react';
 import PostCardMore from './components/PostCardModal/PostCardMore';
 import PostCardReport from './components/PostCardModal/PostCardReport';
 import StoryModal from './components/Story/StoryModal';
-
-import { useState, useEffect, lazy, Suspense } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
 
 // parts
 import Navbar from './parts/Navbar/Navbar';
@@ -51,6 +51,7 @@ const Page404 = lazy(() => import('./pages/Page404/Page404'));
 const Wallet = lazy(() => import('./pages/Wallet/Wallet'));
 const Settings = lazy(() => import('./pages/Settings/Settings'));
 const Trends = lazy(() => import('./pages/Trends/Trends'));
+const About = lazy(() => import('./pages/About/About'));
 
 /**
  * To solve CROS origin problem:
@@ -204,6 +205,7 @@ function App() {
                           />
                           <Route path="/trends" element={<Trends />} />
                           <Route path="/wallet" element={<Wallet />} />
+                          <Route path="/about" element={<About />} />
                           <Route path="/settings" element={<Settings />} />
                           <Route path="/login" element={<Login />} />
                           <Route path="/signup" element={<Signup />} />

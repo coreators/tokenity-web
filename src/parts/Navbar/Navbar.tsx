@@ -14,6 +14,7 @@ import UserContext from "../../context/UserContext";
 import TokenityBtnNavbar from "../../components/Buttons/TokenityBtnNavbar/TokenityBtnNavbar";
 // import UserProfileCard from "../CurrentUser/UserProfileCard";
 import UserImage from "../CurrentUser/UserImage";
+import AccountWallet from "../../components/Account/AccountWallet";
 
 const Navbar = () => {
   // ******* start global state ******* //
@@ -38,6 +39,7 @@ const Navbar = () => {
     settings: false,
     wallet: false,
     trend: false,
+    about: false,
   };
 
   // local state
@@ -86,6 +88,11 @@ const Navbar = () => {
 
             {/* -------------- Start Tabs -------------- */}
             <div className="Navbar__box__tabs">
+              {/* Twittern button Tab */}
+              <div className="Navbar__box__tab --formSubmitButton">
+                <TokenityBtnNavbar />
+              </div>
+
               {/* Home Tab */}
               <div className="Navbar__box__tab">
                 <Link
@@ -97,7 +104,9 @@ const Navbar = () => {
                   <span className="Navbar__box__tab__icon">
                     <i
                       className={
-                        isActive.home ? "fas fa-home-alt" : "fal fa-home-alt"
+                        isActive.home
+                          ? "fas fa-home-alt"
+                          : "fal fa-home-alt"
                       }
                       style={{
                         color: `${
@@ -119,7 +128,7 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              {/* Home Tab */}
+              {/* Trend Tab */}
               <div className="Navbar__box__tab">
                 <Link
                   to="/trends/"
@@ -238,6 +247,40 @@ const Navbar = () => {
                   <UserImage />
                 </Link>
               </div>
+
+              {/* About Tab */}
+              <div className="Navbar__box__tab">
+                <Link
+                  to="/about"
+                  onClick={() => {
+                    setPage("about");
+                  }}
+                >
+                  <span className="Navbar__box__tab__icon">
+                    <i
+                      className={
+                        isActive.about ? "fas fa-book" : "far fa-book"
+                      }
+                      style={{
+                        color: `${
+                          isActive.about ? theme.mainColor : theme.typoMain
+                        }`,
+                      }}
+                    ></i>
+                  </span>
+                  <span
+                    className="Navbar__box__tab__text"
+                    style={{
+                      color: `${
+                        isActive.about ? theme.mainColor : theme.typoMain
+                      }`,
+                    }}
+                  >
+                    {language.navbar.about}
+                  </span>
+                </Link>
+              </div>
+
             
               {/* More Tab */}
               {/* <div className="Navbar__box__tab">
@@ -268,10 +311,6 @@ const Navbar = () => {
                   </span>
                 </Link>
               </div> */}
-              {/* Twittern button Tab */}
-              <div className="Navbar__box__tab --formSubmitButton">
-                <TokenityBtnNavbar />
-              </div>
             </div>
             {/* -------------- End Tabs -------------- */}
           </div>

@@ -1,0 +1,25 @@
+.box {
+  .subTitle {
+    margin-top: 15px;
+  }
+
+  .content {
+    margin-top: 3px;
+  }
+
+  .imgContainer {
+    display: flex;
+    overflow: hidden;
+    margin: 0 auto;
+    img {
+      width: 25%;
+      object-fit: contain;
+    }
+  }
+}
+
+.divider {
+  margin-top: 5px;
+  border: 1px solid white;
+  border-top: 1px;
+}
